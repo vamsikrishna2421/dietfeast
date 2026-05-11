@@ -1300,6 +1300,154 @@
         grid-column: auto;
       }
     }
+
+    /* ── Cart ── */
+    .meal-builder-header {
+      padding: 16px 0 4px;
+      border-top: 2px solid var(--line);
+    }
+    .meal-builder-header h4 {
+      margin: 0 0 4px;
+      font-size: 1rem;
+    }
+    .meal-builder-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+    .add-to-cart-btn {
+      background: var(--tomato);
+      box-shadow: 0 14px 34px rgba(233, 86, 61, 0.22);
+    }
+    .add-to-cart-btn:hover {
+      background: #d44630;
+    }
+    .cart-section {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .cart-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 16px;
+      background: #12231a;
+      color: var(--white);
+    }
+    .cart-section-header h4 {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--white);
+      font-weight: 900;
+    }
+    .cart-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 22px;
+      height: 22px;
+      padding: 0 6px;
+      border-radius: 999px;
+      background: var(--gold);
+      color: #12231a;
+      font-size: 0.75rem;
+      font-weight: 900;
+    }
+    .cart-empty-note {
+      padding: 18px 16px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      text-align: center;
+    }
+    .cart-item {
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--line);
+      background: var(--white);
+    }
+    .cart-item-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .cart-item-name {
+      font-weight: 850;
+      font-size: 0.93rem;
+      color: var(--ink);
+    }
+    .cart-item-meta {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+    .cart-item-price {
+      margin-top: 6px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--mint-dark);
+    }
+    .cart-remove {
+      flex-shrink: 0;
+      padding: 4px 11px;
+      border: 1px solid #e2c2bc;
+      border-radius: 6px;
+      background: #fff4f2;
+      color: var(--tomato);
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .cart-remove:hover {
+      background: #fde8e4;
+    }
+    .cart-totals {
+      padding: 14px 16px;
+      background: #f5faf6;
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 7px;
+    }
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .cart-total-row strong {
+      color: var(--ink);
+      font-weight: 800;
+    }
+    .cart-grand-row {
+      padding-top: 9px;
+      margin-top: 2px;
+      border-top: 1px solid #c8dece;
+      font-size: 1rem;
+      font-weight: 850;
+      color: var(--ink);
+    }
+    .cart-grand-row strong {
+      color: var(--mint-dark);
+      font-size: 1.1rem;
+    }
+    .checkout-section {
+      display: grid;
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 2px solid var(--line);
+      margin-top: 4px;
+    }
+    .checkout-label {
+      margin: 0;
+      font-size: 0.78rem;
+      font-weight: 900;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
   </style>
 </head>
 <body>
@@ -1748,9 +1896,18 @@
             Phone number
             <input type="tel" name="phone" autocomplete="tel" placeholder="Phone for confirmation call" required>
           </label>
+          <label class="full-field">
+            Delivery address
+            <input type="text" name="address" autocomplete="street-address" placeholder="Street, city, ZIP" required>
+          </label>
+          <p class="form-note full-field" id="delivery-info" hidden></p>
+          <div class="meal-builder-header full-field">
+            <h4>Configure a meal</h4>
+            <p>Choose a recipe and customise it, then add it to your cart. Repeat to add different meals.</p>
+          </div>
           <label class="half-field">
             Recipe
-            <select name="recipe" required>
+            <select name="recipe">
               <option value="">Choose a recipe</option>
               <option value="Grilled Chicken Soy-Ginger">Grilled Chicken Soy-Ginger (145 cal)</option>
               <option value="Shrimp Lime-Cilantro">Shrimp Lime-Cilantro (160 cal)</option>
@@ -1768,7 +1925,7 @@
           </label>
           <label class="half-field">
             Quantity
-            <select name="quantity" required>
+            <select name="quantity">
               <option>1 meal</option>
               <option>2 meals</option>
               <option>3 meals</option>
@@ -1813,10 +1970,9 @@
           </fieldset>
           <div class="order-summary full-field" aria-live="polite">
             <div class="summary-topline">
-              <div class="summary-chip"><span>Meal price</span><strong id="summary-price">$0.00</strong></div>
-              <div class="summary-chip"><span>Total calories</span><strong id="summary-calories">0 cal</strong></div>
+              <div class="summary-chip"><span>Item price</span><strong id="summary-price">$0.00</strong></div>
+              <div class="summary-chip"><span>Item calories</span><strong id="summary-calories">0 cal</strong></div>
               <div class="summary-chip"><span>Selected recipe</span><strong id="summary-recipe">Choose one</strong></div>
-              <div class="summary-chip" id="delivery-fee-chip" hidden><span>Delivery fee</span><strong id="summary-delivery">—</strong></div>
             </div>
             <table class="ingredient-table">
               <thead>
@@ -1832,21 +1988,34 @@
             </table>
             <p class="summary-note">Calories are estimates and may change slightly by brand, exact portion, and final cooked weight.</p>
           </div>
-          <label class="full-field">
-            Delivery address
-            <input type="text" name="address" autocomplete="street-address" placeholder="Street, city, ZIP" required>
-          </label>
-          <p class="form-note full-field" id="delivery-info" hidden></p>
-          <label class="full-field">
-            Notes
-            <textarea name="notes" placeholder="Allergies, spice level, delivery window, or special requests"></textarea>
-          </label>
-          <label class="check-option agreement full-field">
-            <input type="checkbox" name="agreement" required>
-            I understand this order is cash on delivery. I agree that Diet Feast will call me to confirm this is a real order, and I must respond before the meal is prepared.
-          </label>
-          <button class="button full-field" type="submit">Order now</button>
-          <p class="form-note full-field" id="order-status">No online payment is collected. Final confirmation happens by phone.</p>
+          <button type="button" id="add-to-cart-btn" class="button add-to-cart-btn full-field">+ Add to cart</button>
+
+          <div id="cart-section" class="cart-section full-field" hidden>
+            <div class="cart-section-header">
+              <h4>Your cart</h4>
+              <span class="cart-badge" id="cart-count">0</span>
+            </div>
+            <div id="cart-items-list"></div>
+            <div class="cart-totals">
+              <div class="cart-total-row"><span>Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
+              <div class="cart-total-row" id="cart-delivery-row" hidden><span>Delivery (<span id="cart-delivery-miles-label">0</span> mi)</span><strong id="cart-delivery-display">$0.00</strong></div>
+              <div class="cart-total-row cart-grand-row"><span>Total</span><strong id="cart-grand-total">$0.00</strong></div>
+            </div>
+          </div>
+
+          <div id="checkout-section" class="checkout-section full-field" hidden>
+            <p class="checkout-label">Complete your order</p>
+            <label class="full-field">
+              Notes
+              <textarea name="notes" placeholder="Allergies, spice level, delivery window, or special requests"></textarea>
+            </label>
+            <label class="check-option agreement full-field">
+              <input type="checkbox" name="agreement">
+              I understand this order is cash on delivery. I agree that Diet Feast will call me to confirm this is a real order, and I must respond before the meal is prepared.
+            </label>
+            <button class="button full-field" id="place-order-btn" type="submit">Place Order</button>
+            <p class="form-note full-field" id="order-status">No online payment is collected. Final confirmation happens by phone.</p>
+          </div>
           </div>
         </form>
         </div>
@@ -2185,19 +2354,6 @@
       if (caloriesEl) caloriesEl.textContent = `${mealCalories * quantity} cal`;
       const foodTotal = mealPrice * quantity;
       if (priceEl) priceEl.textContent = `$${foodTotal.toFixed(2)}`;
-      const deliveryChip = document.querySelector("#delivery-fee-chip");
-      const deliveryStrong = document.querySelector("#summary-delivery");
-      if (deliveryChip) {
-        if (deliveryCalculated && currentDeliveryMiles <= 5 && currentDeliveryMiles > 0) {
-          deliveryChip.hidden = false;
-          if (deliveryStrong) deliveryStrong.textContent = `$${currentDeliveryFee.toFixed(2)} (${currentDeliveryMiles} mi)`;
-        } else if (deliveryCalculated && currentDeliveryMiles === 0) {
-          deliveryChip.hidden = false;
-          if (deliveryStrong) deliveryStrong.textContent = "Free (nearby)";
-        } else {
-          deliveryChip.hidden = true;
-        }
-      }
 
       if (breakdown) {
         const recipeRows = recipe.ingredients.map(([name, grams, calories]) => `
@@ -2253,29 +2409,195 @@
       }, { passive: false });
     }
 
+    /* ── Cart state ── */
+    let cart = [];
+    let cartIdCounter = 0;
+
+    function renderCartTotals() {
+      const subtotal = cart.reduce((s, item) => s + item.price, 0);
+      const subtotalEl = document.querySelector("#cart-subtotal");
+      const deliveryRowEl = document.querySelector("#cart-delivery-row");
+      const deliveryDisplayEl = document.querySelector("#cart-delivery-display");
+      const deliveryMilesLabelEl = document.querySelector("#cart-delivery-miles-label");
+      const grandTotalEl = document.querySelector("#cart-grand-total");
+
+      if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+
+      let deliveryAmt = 0;
+      if (deliveryCalculated && currentDeliveryMiles > 0 && currentDeliveryMiles <= 5) {
+        deliveryAmt = currentDeliveryFee;
+        if (deliveryRowEl) deliveryRowEl.hidden = false;
+        if (deliveryDisplayEl) deliveryDisplayEl.textContent = `$${deliveryAmt.toFixed(2)}`;
+        if (deliveryMilesLabelEl) deliveryMilesLabelEl.textContent = currentDeliveryMiles;
+      } else {
+        if (deliveryRowEl) deliveryRowEl.hidden = true;
+      }
+
+      if (grandTotalEl) grandTotalEl.textContent = `$${(subtotal + deliveryAmt).toFixed(2)}`;
+    }
+
+    function renderCart() {
+      const cartSection = document.querySelector("#cart-section");
+      const checkoutSection = document.querySelector("#checkout-section");
+      const cartItemsList = document.querySelector("#cart-items-list");
+      const cartCountEl = document.querySelector("#cart-count");
+
+      if (!cartSection) return;
+
+      if (cart.length === 0) {
+        cartSection.hidden = true;
+        if (checkoutSection) checkoutSection.hidden = true;
+        return;
+      }
+
+      cartSection.hidden = false;
+      if (checkoutSection) checkoutSection.hidden = false;
+      if (cartCountEl) cartCountEl.textContent = cart.length;
+
+      if (cartItemsList) {
+        cartItemsList.innerHTML = cart.map(item => {
+          const metaParts = [];
+          if (item.proteinAddons.length) metaParts.push(item.proteinAddons.map(a => `+${a.name} ×${a.qty}`).join(", "));
+          if (item.veggieSwaps.length) metaParts.push(item.veggieSwaps.join(", "));
+          if (item.veggieAddons.length) metaParts.push(item.veggieAddons.map(a => `+${a.name} ×${a.qty}`).join(", "));
+          return `
+            <div class="cart-item">
+              <div class="cart-item-row">
+                <div>
+                  <div class="cart-item-name">${item.quantity} × ${item.recipe}</div>
+                  ${metaParts.length ? `<div class="cart-item-meta">${metaParts.join(" · ")}</div>` : ""}
+                </div>
+                <button type="button" class="cart-remove" onclick="removeFromCart(${item.id})">Remove</button>
+              </div>
+              <div class="cart-item-price">$${item.price.toFixed(2)} · ${item.calories} cal</div>
+            </div>`;
+        }).join("");
+      }
+
+      renderCartTotals();
+    }
+
+    window.removeFromCart = function(id) {
+      cart = cart.filter(item => item.id !== id);
+      renderCart();
+    };
+
+    function resetMealBuilder() {
+      if (!orderForm) return;
+      orderForm.querySelector('[name="recipe"]').value = "";
+      orderForm.querySelector('[name="quantity"]').value = "1 meal";
+      orderForm.querySelectorAll('input[name="protein"], input[name="veggie"], input[name="veggie-swap"]')
+        .forEach(cb => { cb.checked = false; });
+      orderForm.querySelectorAll('.addon-qty')
+        .forEach(input => { input.disabled = true; input.value = 1; });
+      updateOrderSummary();
+    }
+
     if (orderForm) {
       orderForm.addEventListener("change", updateOrderSummary);
       orderForm.addEventListener("input", updateOrderSummary);
       updateOrderSummary();
 
+      const addToCartBtn = document.querySelector("#add-to-cart-btn");
+      if (addToCartBtn) {
+        addToCartBtn.addEventListener("click", () => {
+          const formData = new FormData(orderForm);
+          const recipeName = formData.get("recipe");
+          if (!recipeName) {
+            orderForm.querySelector('[name="recipe"]').focus();
+            return;
+          }
+          const quantity = Number.parseInt(formData.get("quantity"), 10) || 1;
+          const recipe = recipeData[recipeName];
+
+          const getAddonQty = (input) => {
+            const qtyInput = input.closest(".addon-option")?.querySelector(".addon-qty");
+            if (qtyInput) qtyInput.disabled = !input.checked;
+            if (!input.checked) return 0;
+            return Math.min(Math.max(Number.parseInt(qtyInput?.value, 10) || 1, 1), 3);
+          };
+
+          const freeVeggieCredits = [...orderForm.querySelectorAll('input[name="veggie-swap"]:checked')].length;
+          const veggieSwaps = [...orderForm.querySelectorAll('input[name="veggie-swap"]:checked')].map(i => i.value);
+
+          const proteinAddons = [...orderForm.querySelectorAll('input[name="protein"][data-calories]')]
+            .map(input => {
+              const qty = getAddonQty(input);
+              if (!qty) return null;
+              return { name: input.dataset.addonName, qty, calories: Number(input.dataset.calories) * qty, cost: Number(input.dataset.cost) * qty };
+            }).filter(Boolean);
+
+          let remainingCredits = freeVeggieCredits;
+          const veggieAddons = [...orderForm.querySelectorAll('input[name="veggie"][data-calories]')]
+            .map(input => {
+              const qty = getAddonQty(input);
+              if (!qty) return null;
+              const freeQty = Math.min(qty, remainingCredits);
+              remainingCredits -= freeQty;
+              const paidQty = qty - freeQty;
+              return { name: input.dataset.addonName, qty, calories: Number(input.dataset.calories) * qty, cost: Number(input.dataset.cost) * paidQty };
+            }).filter(Boolean);
+
+          const allAddons = [...proteinAddons, ...veggieAddons];
+          const addonCalories = allAddons.reduce((s, a) => s + a.calories, 0);
+          const addonCost = allAddons.reduce((s, a) => s + a.cost, 0);
+
+          cart.push({
+            id: cartIdCounter++,
+            recipe: recipeName,
+            quantity,
+            proteinAddons,
+            veggieSwaps,
+            veggieAddons,
+            calories: (recipe.calories + addonCalories) * quantity,
+            price: (recipe.price + addonCost) * quantity
+          });
+
+          renderCart();
+          resetMealBuilder();
+
+          addToCartBtn.textContent = "Added!";
+          window.setTimeout(() => { addToCartBtn.textContent = "+ Add to cart"; }, 1400);
+        });
+      }
+
       orderForm.addEventListener("submit", (event) => {
         event.preventDefault();
-        const button = event.currentTarget.querySelector("button");
         const status = document.querySelector("#order-status");
-        const formData = new FormData(event.currentTarget);
-        const recipe = formData.get("recipe");
-        const quantity = formData.get("quantity");
+        const placeBtn = document.querySelector("#place-order-btn");
 
-        button.textContent = "Order request received";
-        button.disabled = true;
-        if (status) {
-          status.textContent = `${quantity} for ${recipe} received on this page. Connect this form to email or a database before publishing.`;
+        if (cart.length === 0) {
+          if (status) status.textContent = "Your cart is empty. Add at least one meal before placing your order.";
+          return;
         }
 
-        setTimeout(() => {
-          button.textContent = "Order now";
-          button.disabled = false;
-        }, 2600);
+        const agreement = orderForm.querySelector('input[name="agreement"]');
+        if (!agreement?.checked) {
+          if (status) status.textContent = "Please accept the cash-on-delivery agreement to continue.";
+          agreement?.focus();
+          return;
+        }
+
+        if (deliveryCalculated && currentDeliveryMiles > 5) {
+          if (status) status.textContent = `Delivery is only available within 5 miles. Your address is ${currentDeliveryMiles} miles away. Please pick up at 17 Hampden St, Worcester, MA.`;
+          return;
+        }
+
+        const formData = new FormData(orderForm);
+        const name = formData.get("name");
+        const totalPrice = cart.reduce((s, item) => s + item.price, 0) + (deliveryCalculated && currentDeliveryMiles <= 5 ? currentDeliveryFee : 0);
+        const itemsSummary = cart.map(item => `${item.quantity}× ${item.recipe}`).join(", ");
+
+        if (placeBtn) { placeBtn.textContent = "Order received!"; placeBtn.disabled = true; }
+        if (status) status.textContent = `Order for ${name}: ${itemsSummary}. Total $${totalPrice.toFixed(2)}. Connect this form to email or a database before publishing.`;
+
+        window.setTimeout(() => {
+          if (placeBtn) { placeBtn.textContent = "Place Order"; placeBtn.disabled = false; }
+          cart = [];
+          renderCart();
+          resetMealBuilder();
+          if (status) status.textContent = "No online payment is collected. Final confirmation happens by phone.";
+        }, 3500);
       });
     }
     const ORIGIN_ADDRESS = "17 Hampden St, Worcester, MA";
@@ -2312,6 +2634,7 @@
           currentDeliveryMiles = 0;
           if (deliveryInfo) deliveryInfo.hidden = true;
           updateOrderSummary();
+          renderCartTotals();
           return;
         }
         geocodeTimer = setTimeout(async () => {
@@ -2353,6 +2676,7 @@
               }
             }
             updateOrderSummary();
+            renderCartTotals();
           } catch (e) {
             if (deliveryInfo) { deliveryInfo.hidden = false; deliveryInfo.textContent = "Could not calculate delivery distance."; deliveryInfo.style.color = "var(--tomato)"; }
           }
