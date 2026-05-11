@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitMeal - Ultra-Low Calorie Meal Prep Business</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --accent: #f97316;
+            --accent-light: #fed7aa;
+            --success: #10b981;
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border: #334155;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        main {
+            margin-top: 70px;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: var(--accent);
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(16, 185, 129, 0.1));
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 4rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        /* Phase cards */
+        .phase-card {
+            background: linear-gradient(135deg, var(--surface), rgba(249, 115, 22, 0.1));
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phase-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--success));
+        }
+
+        .phase-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .phase-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .stat {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin: 0.5rem 0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--surface);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background: rgba(249, 115, 22, 0.2);
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: rgba(249, 115, 22, 0.05);
+        }
+
+        /* Buttons */
+        button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #ea580c;
+            transform: translateY(-2px);
+        }
+
+        /* List styles */
+        ul {
+            margin: 1.5rem 0 1.5rem 2rem;
+            color: var(--text-muted);
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Stats section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(16, 185, 129, 0.1));
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Problem solution */
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .problem-box, .solution-box {
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .problem-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+        }
+
+        .solution-box {
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid var(--accent);
+        }
+
+        .problem-box h3, .solution-box h3 {
+            margin-top: 0;
+        }
+
+        /* Cost breakdown */
+        .cost-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cost-item.total {
+            background: rgba(249, 115, 22, 0.1);
+            border: none;
+            font-weight: bold;
+        }
+
+        .cost-label {
+            color: var(--text);
+        }
+
+        .cost-value {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Membership plans */
+        .plan-card {
+            background: linear-gradient(135deg, var(--surface), rgba(249, 115, 22, 0.05));
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .plan-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-10px);
+        }
+
+        .plan-card.featured {
+            border-color: var(--accent);
+            box-shadow: 0 0 30px rgba(249, 115, 22, 0.2);
+            transform: scale(1.05);
+        }
+
+        .plan-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin: 1rem 0;
+            font-weight: bold;
+        }
+
+        .plan-price small {
+            font-size: 0.6em;
+            color: var(--text-muted);
+        }
+
+        .plan-details {
+            text-align: left;
+            margin: 2rem 0;
+        }
+
+        .plan-details li {
+            margin-bottom: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .plan-btn {
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+
+        /* Journey */
+        .journey-step {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: var(--surface);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+        }
+
+        .journey-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent);
+            min-width: 50px;
+        }
+
+        .journey-content {
+            flex: 1;
+        }
+
+        .journey-content h3 {
+            margin-top: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 0.8rem;
+                font-size: 0.75rem;
+            }
+
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+
+            .problem-solution {
+                grid-template-columns: 1fr;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 2rem 1rem;
+            }
+
+            .plan-card.featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo">🍽️ FitMeal</div>
+        <ul class="nav-links">
+            <li><a onclick="showPage('home')" class="nav-link active">Home</a></li>
+            <li><a onclick="showPage('roadmap')" class="nav-link">Roadmap</a></li>
+            <li><a onclick="showPage('ingredients')" class="nav-link">Ingredients</a></li>
+            <li><a onclick="showPage('membership')" class="nav-link">Membership Plans</a></li>
+            <li><a onclick="showPage('prep')" class="nav-link">Prep Schedule</a></li>
+            <li><a onclick="showPage('equipment')" class="nav-link">Equipment</a></li>
+            <li><a onclick="showPage('problem')" class="nav-link">Market</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- HOME PAGE -->
+        <div id="home" class="page active">
+            <section>
+                <div class="hero">
+                    <h1>🍽️ FitMeal</h1>
+                    <p>Ultra-Low Calorie Meal Prep Delivery - Worcester, MA</p>
+                    <p style="color: var(--text-muted); margin-bottom: 0;">100-200 cal meals that look & taste like 500+ calories</p>
+                </div>
+
+                <div style="text-align: center; margin: 3rem 0;">
+                    <h2>Executive Summary</h2>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">$9.99</div>
+                        <div class="stat-label">Per meal (37% margin)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">10 Meals/Day</div>
+                        <div class="stat-label">Max sustainable</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">$1,285</div>
+                        <div class="stat-label">Monthly profit at peak</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">$8,473</div>
+                        <div class="stat-label">Year 1 profit</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Why FitMeal?</h3>
+                    <ul>
+                        <li><span class="highlight">Shirataki Noodles</span> - Only 10 calories per pack, creates massive volumes</li>
+                        <li><span class="highlight">Perfect for Weight Loss</span> - 100-200 cal meals feel like 500+ calories</li>
+                        <li><span class="highlight">Halal-Friendly</span> - Only chicken, eggs, shrimp, tofu (no beef/pork)</li>
+                        <li><span class="highlight">Affordable</span> - $9.99 vs competitors' $13.99-16.99</li>
+                        <li><span class="highlight">Ready-to-Eat</span> - Microwave in 2 minutes</li>
+                        <li><span class="highlight">Sustainable</span> - 37% profit margins at 10 meals/day</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Key Metrics</h3>
+                    <ul>
+                        <li>COGS per meal: <span class="highlight">$6.25</span> (worst-case)</li>
+                        <li>Retail price: <span class="highlight">$9.99</span></li>
+                        <li>Profit per meal: <span class="highlight">$3.74</span> (37% margin)</li>
+                        <li>Startup cost: <span class="highlight">$500-1,000</span></li>
+                        <li>Break-even: <span class="highlight">Month 4-5</span></li>
+                        <li>Market: <span class="highlight">Worcester, MA area fitness enthusiasts</span></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ROADMAP PAGE -->
+        <div id="roadmap" class="page">
+            <section>
+                <h2>Business Roadmap: Phase 1 → Phase 3</h2>
+
+                <div class="grid">
+                    <!-- Phase 1 -->
+                    <div class="phase-card">
+                        <div class="phase-number">Phase 1</div>
+                        <div class="phase-title">Validation & Launch</div>
+                        <div class="stat">1-2 meals/day</div>
+                        <div class="stat">Months 1-3</div>
+                        <hr style="border: none; border-top: 1px solid var(--border); margin: 1.5rem 0;">
+                        <p><span class="highlight">Build brand, prove concept</span></p>
+                        <ul style="text-align: left; margin: 1rem 0; font-size: 0.9rem;">
+                            <li>Launch with $500 investment</li>
+                            <li>20-50 meals/month</li>
+                            <li>Get 3 regular customers</li>
+                            <li>Generate testimonials</li>
+                        </ul>
+                        <div class="stat">💰 $60-225/month</div>
+                    </div>
+
+                    <!-- Phase 2 -->
+                    <div class="phase-card">
+                        <div class="phase-number">Phase 2</div>
+                        <div class="phase-title">Viability & Growth</div>
+                        <div class="stat">3-6 meals/day</div>
+                        <div class="stat">Months 4-6</div>
+                        <hr style="border: none; border-top: 1px solid var(--border); margin: 1.5rem 0;">
+                        <p><span class="highlight">Hit profitability, expand</span></p>
+                        <ul style="text-align: left; margin: 1rem 0; font-size: 0.9rem;">
+                            <li>150-180 meals/month</li>
+                            <li>6-8 regular customers</li>
+                            <li>Gym partnerships start</li>
+                            <li>5-day weekly plans popular</li>
+                        </ul>
+                        <div class="stat">💰 $350-800/month</div>
+                    </div>
+
+                    <!-- Phase 3 -->
+                    <div class="phase-card">
+                        <div class="phase-number">Phase 3</div>
+                        <div class="phase-title">Maturity & Scale</div>
+                        <div class="stat">6-10 meals/day</div>
+                        <div class="stat">Months 7-12</div>
+                        <hr style="border: none; border-top: 1px solid var(--border); margin: 1.5rem 0;">
+                        <p><span class="highlight">Max capacity, stable income</span></p>
+                        <ul style="text-align: left; margin: 1rem 0; font-size: 0.9rem;">
+                            <li>240-300 meals/month</li>
+                            <li>10+ regular customers</li>
+                            <li>Established brand locally</li>
+                            <li>Memberships sustain growth</li>
+                        </ul>
+                        <div class="stat">💰 $800-1,285/month</div>
+                    </div>
+                </div>
+
+                <!-- Timeline Table -->
+                <h3 style="text-align: center; margin-top: 3rem;">Month-by-Month Progression</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Month</th>
+                            <th>Phase</th>
+                            <th>Meals/Day</th>
+                            <th>Monthly Meals</th>
+                            <th>Revenue</th>
+                            <th>Profit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1-2</td>
+                            <td>Phase 1</td>
+                            <td>1-2</td>
+                            <td>30-45</td>
+                            <td>$300-450</td>
+                            <td>$60-150</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Phase 1</td>
+                            <td>2-3</td>
+                            <td>65</td>
+                            <td>$649</td>
+                            <td>$225</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Phase 2</td>
+                            <td>3-4</td>
+                            <td>95</td>
+                            <td>$949</td>
+                            <td>$354</td>
+                        </tr>
+                        <tr>
+                            <td>5-6</td>
+                            <td>Phase 2</td>
+                            <td>5-6</td>
+                            <td>145-195</td>
+                            <td>$1,449-1,948</td>
+                            <td>$576-798</td>
+                        </tr>
+                        <tr>
+                            <td>7-9</td>
+                            <td>Phase 3</td>
+                            <td>6-8</td>
+                            <td>180-240</td>
+                            <td>$1,798-2,398</td>
+                            <td>$650-1,000</td>
+                        </tr>
+                        <tr style="background: rgba(249, 115, 22, 0.1);">
+                            <td><strong>12</strong></td>
+                            <td><strong>Phase 3</strong></td>
+                            <td><strong>10</strong></td>
+                            <td><strong>300</strong></td>
+                            <td><strong>$2,997</strong></td>
+                            <td><strong>$1,285</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+
+        <!-- INGREDIENTS PAGE -->
+        <div id="ingredients" class="page">
+            <section>
+                <h2>Ingredients & Cost Breakdown</h2>
+
+                <div class="card">
+                    <h3>🍝 Shirataki Noodles</h3>
+                    <p><strong>Amazon Link:</strong> <a href="https://www.amazon.com/Hethstia-Shirataki-Low-Carb-Fettuccine-Calorie/dp/B0D4TQBQ7Z" target="_blank" style="color: var(--accent);">Hethstia 12-Pack on Amazon</a></p>
+                    <div class="cost-item">
+                        <span class="cost-label">Retail (Amazon, 12-pack)</span>
+                        <span class="cost-value">$24.99 = $2.08/pack</span>
+                    </div>
+                    <div class="cost-item total">
+                        <span class="cost-label">Using for calculations (Worst-case)</span>
+                        <span class="cost-value">$2.50/pack</span>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 3rem;">🥩 Proteins (Per 4oz serving)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Protein</th>
+                            <th>Source</th>
+                            <th>Worst-Case Cost</th>
+                            <th>Per Meal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>🍗 Chicken Breast</td>
+                            <td>Costco/Local Market</td>
+                            <td>$3.00/oz</td>
+                            <td>$2.50</td>
+                        </tr>
+                        <tr>
+                            <td>🦐 Shrimp (Frozen)</td>
+                            <td>Costco</td>
+                            <td>$4.00/oz</td>
+                            <td>$3.00</td>
+                        </tr>
+                        <tr>
+                            <td>🥚 Eggs (2 large)</td>
+                            <td>Local Market</td>
+                            <td>$1.25</td>
+                            <td>$1.00</td>
+                        </tr>
+                        <tr>
+                            <td>🟫 Tofu (Firm)</td>
+                            <td>Local/Online</td>
+                            <td>$1.50/oz</td>
+                            <td>$1.20</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 3rem;">🥬 Vegetables (Per Meal)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Vegetable</th>
+                            <th>Source</th>
+                            <th>Per Meal Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Broccoli</td>
+                            <td>Local Market</td>
+                            <td>$0.40</td>
+                        </tr>
+                        <tr>
+                            <td>Bell Peppers</td>
+                            <td>Local Market</td>
+                            <td>$0.35</td>
+                        </tr>
+                        <tr>
+                            <td>Mushrooms</td>
+                            <td>Local Market</td>
+                            <td>$0.50</td>
+                        </tr>
+                        <tr>
+                            <td>Carrots</td>
+                            <td>Local Market</td>
+                            <td>$0.25</td>
+                        </tr>
+                        <tr>
+                            <td>Spinach/Cabbage</td>
+                            <td>Local Market</td>
+                            <td>$0.30</td>
+                        </tr>
+                        <tr style="background: rgba(249, 115, 22, 0.1); font-weight: bold;">
+                            <td colspan="2">Average per meal</td>
+                            <td>$0.85</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 3rem;">🧂 Sauces & Seasonings (Per Meal)</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                    <div class="card">
+                        <strong>Soy Sauce</strong>
+                        <div class="cost-item">
+                            <span class="cost-label">Kikkoman Standard</span>
+                            <span class="cost-value">$0.15/meal</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <strong>Sesame Oil</strong>
+                        <div class="cost-item">
+                            <span class="cost-label">Premium 14oz</span>
+                            <span class="cost-value">$0.20/meal</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <strong>Garlic & Ginger</strong>
+                        <div class="cost-item">
+                            <span class="cost-label">Fresh minced</span>
+                            <span class="cost-value">$0.10/meal</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <strong>Various Spices</strong>
+                        <div class="cost-item">
+                            <span class="cost-label">Bulk seasoning</span>
+                            <span class="cost-value">$0.20/meal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 3rem; background: rgba(249, 115, 22, 0.1);">
+                    <h3>📊 Complete Cost Per Meal (Worst-Case)</h3>
+                    <div class="cost-item">
+                        <span class="cost-label">Shirataki Noodles</span>
+                        <span class="cost-value">$2.50</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="cost-label">Protein (avg: $2.00)</span>
+                        <span class="cost-value">$2.00</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="cost-label">Vegetables</span>
+                        <span class="cost-value">$0.85</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="cost-label">Sauces & Seasonings</span>
+                        <span class="cost-value">$0.65</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="cost-label">Packaging</span>
+                        <span class="cost-value">$0.25</span>
+                    </div>
+                    <div class="cost-item total">
+                        <span class="cost-label"><strong>TOTAL COGS PER MEAL</strong></span>
+                        <span class="cost-value"><strong>$6.25</strong></span>
+                    </div>
+                    <div style="margin-top: 1rem; text-align: center; padding-top: 1rem; border-top: 1px solid var(--border);">
+                        <p style="margin: 0.5rem 0;"><strong style="color: var(--text);">Retail Price:</strong> <span class="highlight" style="font-size: 1.2rem;">$9.99</span></p>
+                        <p style="margin: 0.5rem 0;"><strong style="color: var(--text);">Profit Per Meal:</strong> <span class="highlight" style="font-size: 1.2rem;">$3.74</span></p>
+                        <p style="margin: 0;"><strong style="color: var(--text);">Margin:</strong> <span class="highlight" style="font-size: 1.2rem;">37.4%</span></p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 3rem;">
+                    <h3>💳 Monthly Ingredient Budget (at 10 meals/day = 300 meals/month)</h3>
+                    <table>
+                        <tr>
+                            <td>Shirataki (300 packs)</td>
+                            <td style="text-align: right;">$750</td>
+                        </tr>
+                        <tr>
+                            <td>Proteins (avg: $2.00)</td>
+                            <td style="text-align: right;">$600</td>
+                        </tr>
+                        <tr>
+                            <td>Vegetables</td>
+                            <td style="text-align: right;">$255</td>
+                        </tr>
+                        <tr>
+                            <td>Sauces & Seasonings</td>
+                            <td style="text-align: right;">$195</td>
+                        </tr>
+                        <tr>
+                            <td>Packaging</td>
+                            <td style="text-align: right;">$75</td>
+                        </tr>
+                        <tr style="background: rgba(249, 115, 22, 0.1); font-weight: bold;">
+                            <td>TOTAL MONTHLY COGS</td>
+                            <td style="text-align: right;">$1,875</td>
+                        </tr>
+                        <tr style="background: rgba(16, 185, 129, 0.1); font-weight: bold;">
+                            <td>Revenue (300 × $9.99)</td>
+                            <td style="text-align: right;">$2,997</td>
+                        </tr>
+                        <tr style="background: rgba(16, 185, 129, 0.2); font-weight: bold; color: var(--accent);">
+                            <td>Monthly Profit</td>
+                            <td style="text-align: right;">$1,122</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- MEMBERSHIP PLANS PAGE -->
+        <div id="membership" class="page">
+            <section>
+                <h2>Monthly Membership Plans</h2>
+                <p style="text-align: center; font-size: 1.1rem; margin-bottom: 3rem;">Designed for busy professionals: 5 days of healthy meals, 2 days freedom for cheat meals or additional orders</p>
+
+                <div class="grid">
+                    <!-- Starter Plan -->
+                    <div class="plan-card">
+                        <div class="plan-name">🌟 Starter Plan</div>
+                        <div class="plan-price">$74.99<small>/month</small></div>
+                        <p style="color: var(--text-muted); margin: 1rem 0;">5 meals per week</p>
+                        
+                        <div class="plan-details">
+                            <p style="color: var(--text); margin-bottom: 1rem;"><strong>What's Included:</strong></p>
+                            <ul>
+                                <li>✅ 5 meals per week (Monday-Friday)</li>
+                                <li>✅ 20 meals/month</li>
+                                <li>✅ Your choice of recipes</li>
+                                <li>✅ 100-200 calories per meal</li>
+                                <li>✅ Fresh & ready-to-eat</li>
+                                <li>✅ Free local delivery</li>
+                                <li>❌ Weekends not included</li>
+                            </ul>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;"><strong>Cost per meal:</strong> <span class="highlight">$3.75</span> (62% off retail!)</p>
+                        <button class="plan-btn">Choose Plan</button>
+                    </div>
+
+                    <!-- Popular Plan -->
+                    <div class="plan-card featured">
+                        <div class="plan-badge">BEST VALUE</div>
+                        <div class="plan-name">🔥 Popular Plan</div>
+                        <div class="plan-price">$139.99<small>/month</small></div>
+                        <p style="color: var(--text-muted); margin: 1rem 0;">5 meals x 2 weeks</p>
+                        
+                        <div class="plan-details">
+                            <p style="color: var(--text); margin-bottom: 1rem;"><strong>What's Included:</strong></p>
+                            <ul>
+                                <li>✅ 5 meals per week</li>
+                                <li>✅ 2 weeks guaranteed</li>
+                                <li>✅ 40 meals/month</li>
+                                <li>✅ Choose your recipes</li>
+                                <li>✅ Protein rotation options</li>
+                                <li>✅ Free local delivery</li>
+                                <li>✅ 2 free weekend meals</li>
+                            </ul>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;"><strong>Cost per meal:</strong> <span class="highlight">$3.50</span> (65% off retail!)</p>
+                        <button class="plan-btn">Choose Plan</button>
+                    </div>
+
+                    <!-- Premium Plan -->
+                    <div class="plan-card">
+                        <div class="plan-name">👑 Premium Plan</div>
+                        <div class="plan-price">$239.99<small>/month</small></div>
+                        <p style="color: var(--text-muted); margin: 1rem 0;">5 meals every week</p>
+                        
+                        <div class="plan-details">
+                            <p style="color: var(--text); margin-bottom: 1rem;"><strong>What's Included:</strong></p>
+                            <ul>
+                                <li>✅ 5 meals per week</li>
+                                <li>✅ Full month (4 weeks)</li>
+                                <li>✅ 60 meals/month</li>
+                                <li>✅ Unlimited recipe choices</li>
+                                <li>✅ Special protein selections</li>
+                                <li>✅ Free delivery 6 days/week</li>
+                                <li>✅ 5 free weekend meals</li>
+                                <li>✅ Priority ordering</li>
+                            </ul>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;"><strong>Cost per meal:</strong> <span class="highlight">$3.33</span> (67% off retail!)</p>
+                        <button class="plan-btn">Choose Plan</button>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 3rem; background: rgba(249, 115, 22, 0.1);">
+                    <h3>💡 How Membership Works</h3>
+                    
+                    <div class="journey-step">
+                        <div class="journey-number">1</div>
+                        <div class="journey-content">
+                            <h3>Pick Your Plan</h3>
+                            <p>Choose Starter (1 week), Popular (2 weeks), or Premium (4 weeks). All include 5 meals/week Monday-Friday.</p>
+                        </div>
+                    </div>
+
+                    <div class="journey-step">
+                        <div class="journey-number">2</div>
+                        <div class="journey-content">
+                            <h3>Select Your Recipes</h3>
+                            <p>Choose from 10+ recipes with chicken, shrimp, eggs, or tofu. Rotate proteins for variety.</p>
+                        </div>
+                    </div>
+
+                    <div class="journey-step">
+                        <div class="journey-number">3</div>
+                        <div class="journey-content">
+                            <h3>Weekends Are Free</h3>
+                            <p>Saturday & Sunday are your days off. Enjoy cheat meals or add extra meals at $9.99 each.</p>
+                        </div>
+                    </div>
+
+                    <div class="journey-step">
+                        <div class="journey-number">4</div>
+                        <div class="journey-content">
+                            <h3>Additional Meals Available</h3>
+                            <p>Want extra meals on weekends? Order any time at full retail price ($9.99/meal). Members get priority.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 3rem;">
+                    <h3>🎁 Special Membership Offers</h3>
+                    <ul>
+                        <li><strong>Annual Commitment Discount:</strong> Pay for 11 months, get the 12th free (8% discount)</li>
+                        <li><strong>Referral Bonus:</strong> Refer a friend → Both get $20 credit toward next month</li>
+                        <li><strong>Pause Option:</strong> Pause membership for 1 month without penalty (max 2x/year)</li>
+                        <li><strong>Free Taste Test:</strong> First-time members get 1 free meal to try</li>
+                        <li><strong>Group Discount:</strong> 3+ friends join same plan → 10% extra discount for all</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 3rem; border-color: #10b981;">
+                    <h3 style="color: #10b981;">📊 Membership Revenue Model</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Plan</th>
+                                <th>Price/Month</th>
+                                <th>Meals/Month</th>
+                                <th>Your COGS</th>
+                                <th>Your Profit</th>
+                                <th>Margin</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Starter (1 week)</td>
+                                <td>$74.99</td>
+                                <td>20</td>
+                                <td>$125</td>
+                                <td>$18</td>
+                                <td>12.5%</td>
+                            </tr>
+                            <tr>
+                                <td>Popular (2 weeks)</td>
+                                <td>$139.99</td>
+                                <td>40</td>
+                                <td>$250</td>
+                                <td>$84</td>
+                                <td>25%</td>
+                            </tr>
+                            <tr style="background: rgba(249, 115, 22, 0.1); font-weight: bold;">
+                                <td>Premium (4 weeks)</td>
+                                <td>$239.99</td>
+                                <td>60</td>
+                                <td>$375</td>
+                                <td>$183</td>
+                                <td>32.7%</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong>Goal: 5 customers per plan</strong></td>
+                                <td colspan="2"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr style="background: rgba(16, 185, 129, 0.1); font-weight: bold;">
+                                <td colspan="2">Total Monthly Revenue</td>
+                                <td colspan="2">300 meals</td>
+                                <td colspan="2">$1,062 profit</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card" style="margin-top: 3rem;">
+                    <h3>⚡ Why Memberships Work for Your Business</h3>
+                    <ul>
+                        <li><strong>Predictable Revenue:</strong> Know how many meals to prepare each month</li>
+                        <li><strong>Better Margins:</strong> Bulk buying at better prices = higher profit</li>
+                        <li><strong>Customer Loyalty:</strong> Paying upfront = committed customers</li>
+                        <li><strong>Reduced Churn:</strong> Monthly commitment = lower cancellation rate</li>
+                        <li><strong>Upsell Opportunity:</strong> Weekend meals = extra $40-60/customer/month</li>
+                        <li><strong>Easier Logistics:</strong> Deliver to same 5 customers = faster route</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- PREP SCHEDULE PAGE -->
+        <div id="prep" class="page">
+            <section>
+                <h2>Prep Schedule & Process</h2>
+
+                <div class="card">
+                    <h3>⏰ Daily Prep Routine (2-3 hours total)</h3>
+                    <p style="color: var(--text);">For 5-10 meals, estimate 2-3 hours per day</p>
+
+                    <div class="journey-step">
+                        <div class="journey-number">1</div>
+                        <div class="journey-content">
+                            <h3>Morning (6-8 AM) - Protein Prep (45 min)</h3>
+                            <ul>
+                                <li><strong>Chicken:</strong> Thaw, slice, season, pan-sear 5 min each side</li>
+                                <li><strong>Shrimp:</strong> Thaw in cold water, peel, pat dry, quick sear 2 min each side</li>
+                                <li><strong>Eggs:</strong> Scramble in large batch, cool</li>
+                                <li><strong>Tofu:</strong> Cube, pan-fry until golden</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="journey-step">
+                        <div class="journey-number">2</div>
+                        <div class="journey-content">
+                            <h3>Mid-Morning (8-9 AM) - Vegetable Prep (30 min)</h3>
+                            <ul>
+                                <li><strong>Chop:</strong> Broccoli, peppers, mushrooms, spinach, carrots, cabbage</li>
+                                <li><strong>Pre-cook (optional):</strong> Some vegetables to improve texture</li>
+                                <li><strong>Pre-measure:</strong> Portion vegetables into containers</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="journey-step">
+                        <div class="journey-number">3</div>
+                        <div class="journey-content">
+                            <h3>Afternoon (12-2 PM) - Meal Assembly (45 min for 10 meals)</h3>
+                            <ul>
+                                <li>Rinse shirataki, dry-pan 3 minutes</li>
+                                <li>Add vegetables (already prepped)</li>
+                                <li>Add cooked protein (already prepared)</li>
+                                <li>Add sauces & seasonings</li>
+                                <li>Pack in container, label with date & recipe name</li>
+                                <li>Cool to room temp, refrigerate</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 3rem;">
+                    <h3>📅 Weekly Prep Strategy</h3>
+                    <p>Organize into 2-3 prep sessions per week to minimize daily time</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>Activity</th>
+                                <th>Time</th>
+                                <th>Output</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Monday AM</td>
+                                <td>Weekly shopping (Costco, local market)</td>
+                                <td>1-2 hrs</td>
+                                <td>All ingredients</td>
+                            </tr>
+                            <tr>
+                                <td>Tuesday</td>
+                                <td>Batch cook: Chicken, eggs</td>
+                                <td>2 hrs</td>
+                                <td>30-40 meals prepped</td>
+                            </tr>
+                            <tr>
+                                <td>Wed-Fri</td>
+                                <td>Daily assembly (3-5 meals/day)</td>
+                                <td>1.5 hrs/day</td>
+                                <td>Fresh meals daily</td>
+                            </tr>
+                            <tr>
+                                <td>Friday PM</td>
+                                <td>Batch cook: Shrimp, tofu, vegetables</td>
+                                <td>2 hrs</td>
+                                <td>Weekend prep</td>
+                            </tr>
+                            <tr>
+                                <td>Sat-Sun</td>
+                                <td>Daily assembly (2-3 meals/day)</td>
+                                <td>1 hr/day</td>
+                                <td>Weekend meals (on demand)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card" style="margin-top: 3rem;">
+                    <h3>🧊 Food Safety & Shelf Life</h3>
+                    <ul>
+                        <li><strong>Refrigeration Required:</strong> Keep below 40°F at all times</li>
+                        <li><strong>Shelf Life:</strong> 5-7 days in refrigerator</li>
+                        <li><strong>Labeling:</strong> Date & recipe name on every meal</li>
+                        <li><strong>Reheating:</strong> Microwave 2-3 minutes</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 3rem; background: rgba(249, 115, 22, 0.1);">
+                    <h3>📦 Pre-Cooked Ingredients to Keep Ready</h3>
+
+                    <h4 style="color: var(--text); margin-top: 1.5rem;">Proteins (Pre-cooked & Portioned)</h4>
+                    <ul>
+                        <li>🍗 Grilled chicken breasts (4oz portions, frozen or refrigerated)</li>
+                        <li>🦐 Cooked shrimp (4oz portions, frozen)</li>
+                        <li>🥚 Scrambled eggs (2-egg portions, refrigerated)</li>
+                        <li>🟫 Pan-fried tofu (4oz portions, refrigerated)</li>
+                    </ul>
+
+                    <h4 style="color: var(--text); margin-top: 1.5rem;">Vegetables (Prepped & Ready)</h4>
+                    <ul>
+                        <li>Broccoli florets (fresh, 2-cup portions)</li>
+                        <li>Bell pepper strips (fresh, 1-cup portions)</li>
+                        <li>Sautéed mushrooms (cooked, ready to add)</li>
+                        <li>Diced carrots (fresh, pre-cut)</li>
+                        <li>Spinach/Cabbage (fresh, ready to cook)</li>
+                    </ul>
+
+                    <h4 style="color: var(--text); margin-top: 1.5rem;">Sauces & Seasonings (Ready to Use)</h4>
+                    <ul>
+                        <li>Soy sauce (ready to use)</li>
+                        <li>Sesame oil (ready to use)</li>
+                        <li>Various spice blends (pre-mixed or jarred)</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- EQUIPMENT PAGE -->
+        <div id="equipment" class="page">
+            <section>
+                <h2>Equipment & Kitchen Setup</h2>
+
+                <p style="text-align: center; font-size: 1.1rem; color: var(--text);">Total startup cost: <span class="highlight">$500-800</span> (most items you likely already have)</p>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3>🍳 Cooking Equipment</h3>
+                        <ul>
+                            <li><strong>Large Skillet/Wok:</strong> $30-50</li>
+                            <li><strong>Large Pot:</strong> $20-40</li>
+                            <li><strong>Cutting Board:</strong> $15-25</li>
+                            <li><strong>Chef's Knife:</strong> $20-40</li>
+                            <li><strong>Mixing Bowls:</strong> $15-25</li>
+                            <li><strong>Measuring Cups/Spoons:</strong> $10</li>
+                        </ul>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                            <p><strong style="color: var(--accent);">Subtotal: $110-190</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>❄️ Storage & Refrigeration</h3>
+                        <ul>
+                            <li><strong>Food Storage Containers:</strong> $30-50</li>
+                            <li><strong>Container Lids:</strong> $15-25</li>
+                            <li><strong>Labels & Markers:</strong> $10-20</li>
+                            <li><strong>Cooling Racks:</strong> $20-30</li>
+                            <li><strong>Ice Bath Supplies:</strong> $10</li>
+                        </ul>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                            <p><strong style="color: var(--accent);">Subtotal: $85-165</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>📦 Packaging & Delivery</h3>
+                        <ul>
+                            <li><strong>Microwave Containers (16oz):</strong> $40-60</li>
+                            <li><strong>Container Lids:</strong> $20-30</li>
+                            <li><strong>Labels & Printer:</strong> $30-50</li>
+                            <li><strong>Insulated Bag:</strong> $20-30</li>
+                            <li><strong>Ice Packs:</strong> $10-15</li>
+                        </ul>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                            <p><strong style="color: var(--accent);">Subtotal: $120-185</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>⚖️ Weighing & Measuring</h3>
+                        <ul>
+                            <li><strong>Digital Kitchen Scale:</strong> $15-30</li>
+                            <li><strong>Measuring Cups (set):</strong> $10</li>
+                            <li><strong>Measuring Spoons (set):</strong> $5</li>
+                            <li><strong>Food Thermometer:</strong> $10-20</li>
+                        </ul>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                            <p><strong style="color: var(--accent);">Subtotal: $40-65</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🧹 Cleaning & Sanitation</h3>
+                        <ul>
+                            <li><strong>Food-Grade Cleaning Supplies:</strong> $20</li>
+                            <li><strong>Paper Towels/Cloth:</strong> $15</li>
+                            <li><strong>Gloves:</strong> $10</li>
+                            <li><strong>Trash Bags:</strong> $10</li>
+                        </ul>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                            <p><strong style="color: var(--accent);">Subtotal: $55</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>📋 Admin & Operations</h3>
+                        <ul>
+                            <li><strong>Recipe Cards/Documentation:</strong> Digital (free)</li>
+                            <li><strong>Order Book:</strong> $10</li>
+                            <li><strong>Cost Tracking Sheet:</strong> Digital (free)</li>
+                        </ul>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                            <p><strong style="color: var(--accent);">Subtotal: $10</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 3rem; background: rgba(249, 115, 22, 0.1);">
+                    <h3>📊 Equipment Budget Summary</h3>
+                    <table>
+                        <tr>
+                            <td>Cooking Equipment</td>
+                            <td style="text-align: right;">$110-190</td>
+                        </tr>
+                        <tr>
+                            <td>Storage & Refrigeration</td>
+                            <td style="text-align: right;">$85-165</td>
+                        </tr>
+                        <tr>
+                            <td>Packaging & Delivery</td>
+                            <td style="text-align: right;">$120-185</td>
+                        </tr>
+                        <tr>
+                            <td>Weighing & Measuring</td>
+                            <td style="text-align: right;">$40-65</td>
+                        </tr>
+                        <tr>
+                            <td>Cleaning & Sanitation</td>
+                            <td style="text-align: right;">$55</td>
+                        </tr>
+                        <tr>
+                            <td>Admin & Operations</td>
+                            <td style="text-align: right;">$10</td>
+                        </tr>
+                        <tr style="background: rgba(249, 115, 22, 0.1); font-weight: bold;">
+                            <td>TOTAL EQUIPMENT</td>
+                            <td style="text-align: right;">$420-860</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card" style="margin-top: 2rem;">
+                    <h3>✅ What You Probably Already Have</h3>
+                    <ul>
+                        <li>Basic kitchen knives & cutting board</li>
+                        <li>Pots and pans</li>
+                        <li>Measuring cups/spoons</li>
+                        <li>Mixing bowls</li>
+                        <li>Refrigerator & freezer</li>
+                    </ul>
+                    <p style="margin-top: 1.5rem;"><strong style="color: var(--accent);">So your actual startup cost = ~$200-300</strong> for just the new items</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- PROBLEM & SOLUTION PAGE -->
+        <div id="problem" class="page">
+            <section>
+                <h2>Problem, Solution & Market</h2>
+
+                <div class="problem-solution">
+                    <div class="problem-box">
+                        <h3 style="color: #ef4444;">❌ THE PROBLEM</h3>
+                        <ul>
+                            <li><strong>Weight loss meals are expensive:</strong> $13.99-16.99/meal from HelloFresh, Factor</li>
+                            <li><strong>Existing meals are too calorie-dense:</strong> 500-700 calories (not ideal for dieters)</li>
+                            <li><strong>Portion size frustration:</strong> People want to feel full, not eat tiny portions</li>
+                            <li><strong>No local options:</strong> Most services are chain-based, not personalized</li>
+                            <li><strong>Halal gap:</strong> No prepared meals specifically for halal audience (no beef/pork)</li>
+                        </ul>
+                    </div>
+
+                    <div class="solution-box">
+                        <h3 style="color: var(--accent);">✅ OUR SOLUTION</h3>
+                        <ul>
+                            <li><strong>Ultra-low-calorie meals:</strong> 100-200 calories</li>
+                            <li><strong>High volume, full satisfaction:</strong> Shirataki noodles = massive portion</li>
+                            <li><strong>Lowest price in market:</strong> $9.99/meal vs competitors' $13.99-16.99</li>
+                            <li><strong>Local & personalized:</strong> Worcester-based, custom recipes for customers</li>
+                            <li><strong>Halal-friendly:</strong> Only chicken, eggs, shrimp, tofu - no beef/pork</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>👥 Target Customer Profile (Worcester, MA Area)</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div>
+                            <p><strong style="color: var(--text);">Demographics:</strong></p>
+                            <ul style="color: var(--text-muted);">
+                                <li>Age: 20-50 years old</li>
+                                <li>Gender: Primarily female (65%)</li>
+                                <li>Income: $40k-120k annual</li>
+                                <li>Location: Worcester metro area</li>
+                                <li>Profession: Busy professionals, healthcare workers</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p><strong style="color: var(--text);">Psychographics:</strong></p>
+                            <ul style="color: var(--text-muted);">
+                                <li>Actively trying to lose weight</li>
+                                <li>Gym members/fitness enthusiasts</li>
+                                <li>Calorie-conscious</li>
+                                <li>Busy professionals (need convenience)</li>
+                                <li>Halal-conscious/Muslim community</li>
+                                <li>Support local businesses</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>📍 Where to Find Customers (Worcester Area)</h3>
+
+                    <div class="journey-step">
+                        <div class="journey-number">1</div>
+                        <div class="journey-content">
+                            <h3>Local Gyms & Fitness Centers (PRIMARY)</h3>
+                            <p>Target gyms in Worcester area:</p>
+                            <ul>
+                                <li>Display meals at gym (small cooler)</li>
+                                <li>Offer gym members 10% discount code</li>
+                                <li>Revenue split: 10-15% commission to gym</li>
+                                <li>Estimate: 2-5 sales/day per gym</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="journey-step">
+                        <div class="journey-number">2</div>
+                        <div class="journey-content">
+                            <h3>Local Facebook Groups & Community Pages</h3>
+                            <p>Join these communities:</p>
+                            <ul>
+                                <li>Worcester fitness groups</li>
+                                <li>Weight loss support groups</li>
+                                <li>Women's wellness groups</li>
+                                <li>Muslim/halal community groups</li>
+                                <li>Local marketplace groups</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="journey-step">
+                        <div class="journey-number">3</div>
+                        <div class="journey-content">
+                            <h3>Word-of-Mouth & Referrals (MOST POWERFUL)</h3>
+                            <p>Build ambassador customers:</p>
+                            <ul>
+                                <li>Get first 3-5 customers to rave about product</li>
+                                <li>Offer $10 referral credit per new customer</li>
+                                <li>Ask for testimonials & before/after photos</li>
+                                <li>Create local social proof</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="journey-step">
+                        <div class="journey-number">4</div>
+                        <div class="journey-content">
+                            <h3>Instagram & Local Social Media</h3>
+                            <p>Build local presence:</p>
+                            <ul>
+                                <li>Post meal photos (look appetizing!)</li>
+                                <li>Share customer testimonials & transformations</li>
+                                <li>Educational posts about calories</li>
+                                <li>Behind-the-scenes prep videos</li>
+                                <li>Location tags (Worcester, MA)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="journey-step">
+                        <div class="journey-number">5</div>
+                        <div class="journey-content">
+                            <h3>Direct Local Outreach</h3>
+                            <p>Personal touch works:</p>
+                            <ul>
+                                <li>Message local fitness influencers</li>
+                                <li>Contact gym owners personally</li>
+                                <li>Text friends & ask for referrals</li>
+                                <li>Send daily menu + price list</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 3rem;">
+                    <h3>🎯 Marketing Hooks (Why They Choose FitMeal)</h3>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                        <div class="card" style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(16, 185, 129, 0.1)); border: 1px solid var(--accent);">
+                            <h4 style="color: var(--accent);">🔥 Ultra-Low Calories</h4>
+                            <p>Only 100-200 calories. Feel full on 1/3 the calories of competitors.</p>
+                        </div>
+
+                        <div class="card" style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(16, 185, 129, 0.1)); border: 1px solid var(--accent);">
+                            <h4 style="color: var(--accent);">💰 40% Cheaper</h4>
+                            <p>$9.99/meal vs competitors' $13.99-16.99. Best value in market.</p>
+                        </div>
+
+                        <div class="card" style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(16, 185, 129, 0.1)); border: 1px solid var(--accent);">
+                            <h4 style="color: var(--accent);">📍 Locally Made</h4>
+                            <p>Support local. Fresh made daily in Worcester.</p>
+                        </div>
+
+                        <div class="card" style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(16, 185, 129, 0.1)); border: 1px solid var(--accent);">
+                            <h4 style="color: var(--accent);">🕌 Halal-Friendly</h4>
+                            <p>No beef/pork. Only chicken, eggs, shrimp, tofu.</p>
+                        </div>
+
+                        <div class="card" style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(16, 185, 129, 0.1)); border: 1px solid var(--accent);">
+                            <h4 style="color: var(--accent);">⚡ Ready-to-Eat</h4>
+                            <p>Microwave 2-3 minutes. Perfect for busy lifestyle.</p>
+                        </div>
+
+                        <div class="card" style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(16, 185, 129, 0.1)); border: 1px solid var(--accent);">
+                            <h4 style="color: var(--accent);">📱 Flexible Plans</h4>
+                            <p>5-day/week from $74.99/month. Weekends are yours.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 3rem; background: rgba(249, 115, 22, 0.1);">
+                    <h3>💬 Pitch Lines to Use</h3>
+                    <ul>
+                        <li><strong>"Only 100-200 calories per meal, but tastes like 500+ calories. How? Shirataki noodles."</strong></li>
+                        <li><strong>"Weight loss meals that actually fill you up. No tiny portions."</strong></li>
+                        <li><strong>"$9.99/meal. That's 40% cheaper than HelloFresh or Factor. Made fresh locally."</strong></li>
+                        <li><strong>"Halal-friendly. No beef, no pork. Just clean, healthy meals."</strong></li>
+                        <li><strong>"Microwave for 3 minutes. Done. Perfect for busy lives."</strong></li>
+                        <li><strong>"$74.99/month for 20 meals (5 days/week). Weekends are your cheat days."</strong></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+
+            // Update active nav link
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Set home as active on load
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.nav-link')[0].classList.add('active');
+        });
+    </script>
+</body>
+</html>

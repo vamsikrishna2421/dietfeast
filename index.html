@@ -1,0 +1,2355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diet Feast | Ultra-Low Calorie Meal Prep in Worcester, MA</title>
+  <meta name="description" content="Diet Feast delivers fresh, filling 120-165 calorie shirataki meals across Worcester, MA for $8 per meal. Halal-friendly, ready-to-eat, and built for weight loss.">
+  <style>
+    :root {
+      --ink: #17211b;
+      --muted: #637069;
+      --line: #dce3dd;
+      --paper: #fbfaf5;
+      --soft: #f1f6ef;
+      --mint: #1f8f63;
+      --mint-dark: #126345;
+      --tomato: #e9563d;
+      --gold: #f3b23c;
+      --white: #ffffff;
+      --shadow: 0 24px 70px rgba(23, 33, 27, 0.13);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.5;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(220, 227, 221, 0.9);
+      background: rgba(251, 250, 245, 0.9);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      width: min(1160px, calc(100% - 32px));
+      min-height: 72px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: 850;
+      font-size: 1.08rem;
+      letter-spacing: 0;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: block;
+      object-fit: contain;
+      box-shadow: 0 10px 28px rgba(31, 143, 99, 0.22);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--mint-dark);
+    }
+
+    .nav-cta,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--mint);
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 850;
+      font-size: 0.95rem;
+      cursor: pointer;
+      box-shadow: 0 14px 34px rgba(31, 143, 99, 0.24);
+    }
+
+    .button.secondary {
+      background: var(--white);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      box-shadow: none;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      margin: 0;
+      min-height: calc(100svh - 72px);
+      display: grid;
+      align-items: center;
+      background:
+        linear-gradient(90deg, rgba(14, 26, 19, 0.72), rgba(14, 26, 19, 0.42) 46%, rgba(14, 26, 19, 0.12)),
+        url("assets/images/hero_image.png") center / cover;
+      color: var(--white);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 140px;
+      background: linear-gradient(0deg, var(--paper), rgba(251, 250, 245, 0));
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: clamp(46px, 7vh, 72px) 0 clamp(54px, 8vh, 84px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      min-height: 34px;
+      padding: 0 12px;
+      border: 1px solid rgba(255, 255, 255, 0.34);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.13);
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin-bottom: 16px;
+      font-size: clamp(3rem, 7vw, 6.35rem);
+      line-height: 0.92;
+      letter-spacing: 0;
+    }
+
+    .hero-copy {
+      max-width: 640px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: clamp(1rem, 1.65vw, 1.18rem);
+      margin-bottom: 22px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions .secondary {
+      background: rgba(255, 255, 255, 0.13);
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.32);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(120px, 1fr));
+      gap: 12px;
+      max-width: 790px;
+    }
+
+    .stat {
+      min-height: 82px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--white);
+      font-size: clamp(1.35rem, 2.5vw, 2rem);
+      line-height: 1;
+    }
+
+    .stat span {
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    section {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 84px 0;
+    }
+
+    .section-kicker {
+      color: var(--tomato);
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      max-width: 760px;
+      font-size: clamp(2rem, 4vw, 3.75rem);
+      line-height: 1.02;
+      letter-spacing: 0;
+      margin-bottom: 18px;
+    }
+
+    .section-intro {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin-bottom: 36px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .single-line-heading {
+      max-width: none;
+      font-size: clamp(1.85rem, 3vw, 3rem);
+      white-space: nowrap;
+    }
+
+    .feature,
+    .plan,
+    .step,
+    .proof-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 8px 30px rgba(23, 33, 27, 0.06);
+    }
+
+    .feature {
+      padding: 24px;
+    }
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      margin-bottom: 18px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: var(--soft);
+      color: var(--mint-dark);
+    }
+
+    .icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .feature h3,
+    .plan h3,
+    .step h3,
+    .proof-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.18rem;
+    }
+
+    .feature p,
+    .step p,
+    .proof-card p {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .ingredient-showcase {
+      padding-top: 44px;
+    }
+
+    .ingredient-wheels {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .ingredient-wheel-card {
+      position: relative;
+      min-height: 560px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(180deg, var(--white), #f3f8f2);
+      box-shadow: 0 8px 30px rgba(23, 33, 27, 0.06);
+      overflow: hidden;
+    }
+
+    .ingredient-wheel-card::after {
+      content: "";
+      position: absolute;
+      top: 150px;
+      left: 50%;
+      z-index: 3;
+      width: 0;
+      height: 0;
+      transform: translateX(-50%);
+      border-left: 14px solid transparent;
+      border-right: 14px solid transparent;
+      border-top: 34px solid var(--tomato);
+      filter: drop-shadow(0 8px 10px rgba(23, 33, 27, 0.18));
+    }
+
+    .ingredient-wheel-card h3 {
+      margin-bottom: 6px;
+      font-size: 1.15rem;
+    }
+
+    .ingredient-wheel-card p {
+      max-width: 420px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-bottom: 0;
+    }
+
+    .ingredient-lens {
+      position: absolute;
+      top: 88px;
+      left: 50%;
+      z-index: 4;
+      width: min(230px, calc(100% - 44px));
+      min-height: 54px;
+      transform: translateX(-50%);
+      display: grid;
+      place-items: center;
+      padding: 10px 14px;
+      border: 1px solid rgba(31, 143, 99, 0.5);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 12px 34px rgba(23, 33, 27, 0.12);
+      color: var(--mint-dark);
+      text-align: center;
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      font-weight: 950;
+      line-height: 1;
+      backdrop-filter: blur(10px);
+    }
+
+    .ingredient-lens::after {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(243, 178, 60, 0.46);
+      border-radius: 6px;
+      pointer-events: none;
+    }
+
+    .ingredient-wheel {
+      --items: 6;
+      --spin-time: 18s;
+      --label-radius: -144px;
+      --label-angle: 0deg;
+      --wheel-colors: #0b2a3d 0deg 60deg, #ffd500 60deg 120deg, #d8c9a6 120deg 180deg, #0b2a3d 180deg 240deg, #ffd500 240deg 300deg, #d8c9a6 300deg 360deg;
+      position: relative;
+      left: 50%;
+      width: min(420px, calc(100% - 28px));
+      aspect-ratio: 1;
+      margin-top: 78px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      border: 1px solid rgba(23, 33, 27, 0.08);
+      background: conic-gradient(from -90deg, var(--wheel-colors));
+      animation: ingredientSpin var(--spin-time) linear infinite;
+      box-shadow: 0 24px 60px rgba(23, 33, 27, 0.14);
+    }
+
+    .ingredient-wheel::before {
+      content: none;
+    }
+
+    .ingredient-wheel::after {
+      content: "";
+      position: absolute;
+      inset: 38%;
+      z-index: 3;
+      border-radius: 50%;
+      background: var(--white);
+      box-shadow: inset 0 0 0 1px rgba(23, 33, 27, 0.06), 0 8px 22px rgba(23, 33, 27, 0.1);
+    }
+
+    .ingredient-item {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      width: 142px;
+      min-height: 34px;
+      display: grid;
+      place-items: center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #08271b;
+      font-size: 1.05rem;
+      font-weight: 900;
+      line-height: 1;
+      text-align: center;
+      box-shadow: 0 6px 16px rgba(23, 33, 27, 0.12);
+      text-shadow: none;
+      transform:
+        translate(-50%, -50%)
+        rotate(calc(var(--label-angle) + (360deg / var(--items) * var(--index)) + (180deg / var(--items))))
+        translateY(var(--label-radius))
+        rotate(90deg);
+    }
+
+    @keyframes ingredientSpin {
+      to {
+        transform: translateX(-50%) rotate(360deg);
+      }
+    }
+
+    .menu-band {
+      width: 100%;
+      margin: 18px 0 0;
+      padding: 86px 0;
+      background: #12231a;
+      color: var(--white);
+    }
+
+    .menu-wrap {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 38px;
+      align-items: start;
+    }
+
+    .menu-visual {
+      position: sticky;
+      top: 96px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .menu-photo {
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      aspect-ratio: 1 / 1;
+      background: #22362b;
+    }
+
+    .menu-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.28s ease, transform 0.28s ease, filter 0.28s ease;
+    }
+
+    .menu-photo img.is-swapping {
+      opacity: 0.35;
+      transform: scale(1.035);
+      filter: saturate(0.75);
+    }
+
+    .menu-list {
+      display: grid;
+      gap: 10px;
+      max-height: min(760px, calc(100vh - 150px));
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding-right: 8px;
+      scrollbar-color: rgba(243, 178, 60, 0.8) rgba(255, 255, 255, 0.08);
+      scrollbar-width: thin;
+    }
+
+    .menu-list::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .menu-list::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+    }
+
+    .menu-list::-webkit-scrollbar-thumb {
+      background: rgba(243, 178, 60, 0.8);
+      border-radius: 999px;
+    }
+
+    .recipe-note {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .recipe-note span {
+      min-height: 76px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.8rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+    }
+
+    .meal {
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+      transition: background 0.24s ease, border-color 0.24s ease, transform 0.24s ease;
+    }
+
+    .meal.is-active {
+      border-color: rgba(243, 178, 60, 0.75);
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(-4px);
+    }
+
+    .meal-toggle {
+      width: 100%;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: auto 1fr auto auto;
+      gap: 14px;
+      align-items: center;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .meal-toggle:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: -2px;
+    }
+
+    .meal-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 99px;
+      background: var(--gold);
+    }
+
+    .meal h3 {
+      margin: 0 0 3px;
+      color: var(--white);
+    }
+
+    .meal p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.96rem;
+    }
+
+    .calories {
+      color: var(--gold);
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .protein {
+      display: block;
+      color: rgba(255, 255, 255, 0.58);
+      font-size: 0.84rem;
+      font-weight: 800;
+      margin-top: 4px;
+    }
+
+.meal-details {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.42s ease, opacity 0.24s ease;
+    }
+
+    .meal.is-active .meal-details {
+      max-height: 660px;
+      opacity: 1;
+    }
+
+    .meal-details-inner {
+      padding: 0 18px 20px 44px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.92rem;
+    }
+
+    .meal-details h4 {
+      margin: 0 0 8px;
+      color: var(--gold);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .meal-details ul,
+    .meal-details ol {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .meal-details li {
+      margin-bottom: 6px;
+    }
+
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .plan {
+      position: relative;
+      overflow: hidden;
+      padding: 26px;
+    }
+
+    .plan.popular {
+      border-color: rgba(31, 143, 99, 0.55);
+      box-shadow: 0 18px 44px rgba(31, 143, 99, 0.16);
+    }
+
+    .badge {
+      display: inline-flex;
+      min-height: 28px;
+      align-items: center;
+      padding: 0 10px;
+      margin-bottom: 18px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--mint-dark);
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .price {
+      margin-bottom: 10px;
+      font-size: 2.75rem;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .price span {
+      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .plan p {
+      color: var(--muted);
+      min-height: 48px;
+    }
+
+    .plan ul {
+      list-style: none;
+      padding: 0;
+      margin: 22px 0 0;
+      display: grid;
+      gap: 11px;
+      color: var(--muted);
+    }
+
+    .plan li {
+      display: flex;
+      gap: 8px;
+    }
+
+    .plan li::before {
+      content: "✓";
+      color: var(--mint);
+      font-weight: 900;
+    }
+
+    .how-it-works {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .step {
+      padding: 24px;
+    }
+
+    .step-number {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--tomato);
+      color: var(--white);
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .proof {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .proof-card {
+      padding: 26px;
+      background: linear-gradient(180deg, var(--white), #f6faf6);
+    }
+
+    .proof-card strong {
+      color: var(--mint-dark);
+    }
+
+    .order-shell {
+      width: min(1440px, calc(100% - 24px));
+      height: calc(100svh - 88px);
+      min-height: 0;
+      margin: 0 auto 32px;
+      padding: 10px 0 0;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 8px;
+      scroll-margin-top: 88px;
+    }
+
+    .order-heading {
+      padding: 0;
+    }
+
+    .order-heading h2 {
+      max-width: none;
+      font-size: clamp(1.15rem, 1.45vw, 1.45rem);
+      line-height: 1;
+      margin-bottom: 0;
+      white-space: nowrap;
+    }
+
+    .lead {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 0.42fr 1.58fr;
+      gap: 0;
+      align-items: stretch;
+      border-radius: 8px;
+      background: var(--ink);
+      color: var(--white);
+      border: 1px solid rgba(31, 143, 99, 0.32);
+      overflow: hidden;
+      box-shadow: 0 0 0 6px rgba(31, 143, 99, 0.08), var(--shadow);
+    }
+
+    .lead-copy {
+      padding: clamp(14px, 2vw, 28px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .lead-copy .section-kicker {
+      margin-bottom: 8px;
+    }
+
+    .lead-copy h2 {
+      color: var(--white);
+      font-size: clamp(1.35rem, 1.85vw, 2rem);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .lead-copy p {
+      color: rgba(255, 255, 255, 0.74);
+      font-size: 0.88rem;
+      line-height: 1.35;
+    }
+
+    .lead-panel {
+      padding: clamp(18px, 3vw, 30px);
+      background: #eef6ec;
+      color: var(--ink);
+      border-radius: 0 8px 8px 0;
+      min-height: 0;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #9fc6aa rgba(255, 255, 255, 0.45);
+    }
+
+    .order-rules {
+      display: grid;
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .order-rule {
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.8);
+      font-size: clamp(0.72rem, 0.82vw, 0.8rem);
+      line-height: 1.28;
+      font-weight: 750;
+    }
+
+    .order-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .full-field {
+      grid-column: 1 / -1;
+    }
+
+    .half-field {
+      grid-column: span 2;
+    }
+
+    .option-fieldset {
+      border: 1px solid #cad8ce;
+      border-radius: 8px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.58);
+    }
+
+    .option-fieldset legend {
+      padding: 0 6px;
+      color: #304039;
+      font-size: 0.86rem;
+      font-weight: 900;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 8px 12px;
+      margin-top: 8px;
+    }
+
+    .option-hint {
+      margin: 8px 0 0;
+      color: #5f7068;
+      font-size: 0.82rem;
+      font-weight: 750;
+    }
+
+    .check-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: #405049;
+      font-size: 0.78rem;
+      font-weight: 760;
+      line-height: 1.2;
+      white-space: nowrap;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .option-meta {
+      color: #5f7068;
+    }
+
+    .option-meta.is-free {
+      color: var(--mint-dark);
+      font-weight: 950;
+    }
+
+    .check-option input {
+      width: 16px;
+      min-height: 16px;
+      margin-top: 2px;
+      accent-color: var(--mint);
+    }
+
+    .addon-option {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 8px;
+      color: #405049;
+      font-size: 0.78rem;
+      font-weight: 760;
+      line-height: 1.2;
+      min-width: 0;
+    }
+
+    .addon-option .check-option {
+      align-items: center;
+      white-space: nowrap;
+      overflow: hidden;
+      font-size: 0.76rem;
+    }
+
+    .addon-copy {
+      min-width: 0;
+    }
+
+    .addon-qty {
+      width: 50px;
+      min-height: 34px;
+      padding: 6px;
+      border: 1px solid #cad8ce;
+      border-radius: 8px;
+      background: var(--white);
+      color: var(--ink);
+      font: inherit;
+      font-weight: 900;
+    }
+
+    .addon-qty:disabled {
+      opacity: 0.42;
+      cursor: not-allowed;
+    }
+
+    .agreement {
+      padding: 14px;
+      border-radius: 8px;
+      background: #fff7df;
+      border: 1px solid #e6c979;
+    }
+
+    .order-summary {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid #b9d3c1;
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    .summary-topline {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px;
+    }
+
+    .summary-chip {
+      min-height: 72px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #f1f6ef;
+      border: 1px solid #d8e6dc;
+    }
+
+    .summary-chip span {
+      display: block;
+      color: #64746b;
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .summary-chip strong {
+      display: block;
+      margin-top: 4px;
+      color: var(--mint-dark);
+      font-size: 1.25rem;
+      line-height: 1.1;
+    }
+
+    .ingredient-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 8px;
+      font-size: 0.86rem;
+    }
+
+    .ingredient-table th,
+    .ingredient-table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #e1e8e3;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .ingredient-table th {
+      background: #edf5ee;
+      color: #304039;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .ingredient-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .summary-note {
+      margin: 0;
+      color: #65756d;
+      font-size: 0.8rem;
+    }
+
+    form {
+      display: grid;
+      gap: 12px;
+    }
+
+    label {
+      display: grid;
+      gap: 6px;
+      color: #304039;
+      font-size: 0.86rem;
+      font-weight: 800;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-height: 46px;
+      padding: 12px;
+      border: 1px solid #cad8ce;
+      border-radius: 8px;
+      background: var(--white);
+      color: var(--ink);
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    .form-note {
+      margin: 0;
+      color: #65756d;
+      font-size: 0.85rem;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding: 32px 0;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+    }
+
+    @media (max-height: 760px) and (min-width: 901px) {
+      .lead-copy {
+        padding: 12px 22px;
+      }
+
+      .lead-copy h2 {
+        font-size: clamp(1.25rem, 1.65vw, 1.8rem);
+        margin-bottom: 7px;
+      }
+
+      .lead-copy p {
+        font-size: 0.82rem;
+        line-height: 1.32;
+      }
+
+      .order-rule {
+        padding: 7px 9px;
+        font-size: 0.72rem;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .nav {
+        align-items: flex-start;
+        min-height: auto;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: calc(100svh - 72px);
+        background-position: 58% center;
+      }
+
+      .hero-stats,
+      .feature-grid,
+      .ingredient-wheels,
+      .plans,
+      .how-it-works,
+      .proof,
+      .menu-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .order-shell {
+        height: auto;
+        min-height: 0;
+      }
+
+      .lead {
+        grid-template-columns: 1fr;
+        min-height: 0;
+        overflow: visible;
+      }
+
+      .order-heading h2 {
+        white-space: normal;
+      }
+
+      .lead-copy {
+        justify-content: flex-start;
+      }
+
+      .lead-panel {
+        border-radius: 0 0 8px 8px;
+        overflow: visible;
+      }
+
+      .menu-visual {
+        position: static;
+      }
+
+      .menu-photo {
+        aspect-ratio: 16 / 10;
+      }
+
+      .menu-list {
+        max-height: 620px;
+      }
+
+      .recipe-note,
+      .meal-details-inner,
+      .summary-topline {
+        grid-template-columns: 1fr;
+      }
+
+      .order-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .option-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .full-field {
+        grid-column: auto;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .nav-cta {
+        display: none;
+      }
+
+      .hero-inner {
+        padding: 48px 0 72px;
+      }
+
+      .hero-actions .button {
+        width: 100%;
+      }
+
+      .single-line-heading {
+        white-space: normal;
+      }
+
+      section {
+        padding: 62px 0;
+      }
+
+      .ingredient-wheel-card {
+        min-height: 450px;
+      }
+
+      .ingredient-lens {
+        top: 94px;
+      }
+
+      .ingredient-wheel-card::after {
+        top: 152px;
+      }
+
+      .ingredient-wheel {
+        width: min(340px, calc(100% - 18px));
+        margin-top: 82px;
+      }
+
+      .ingredient-item {
+        width: 112px;
+        font-size: 0.84rem;
+        transform:
+          translate(-50%, -50%)
+          rotate(calc(var(--label-angle) + (360deg / var(--items) * var(--index)) + (180deg / var(--items))))
+          translateY(calc(var(--label-radius) * 0.8))
+          rotate(90deg);
+      }
+
+      .meal {
+        grid-template-columns: auto 1fr;
+      }
+
+      .meal-toggle {
+        grid-template-columns: auto 1fr auto;
+      }
+
+      .calories {
+        grid-column: 2;
+      }
+
+.meal-details-inner {
+        padding-left: 18px;
+      }
+
+      .option-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .order-grid,
+      .summary-topline {
+        grid-template-columns: 1fr;
+      }
+
+      .half-field {
+        grid-column: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="Diet Feast home">
+        <img class="brand-mark" src="assets/images/diet_feast_logo.png" alt="Diet Feast logo">
+        <span>Diet Feast</span>
+      </a>
+      <div class="nav-links" aria-label="Page sections">
+        <a href="#meals">Meals</a>
+        <a href="#plans">Plans</a>
+        <a href="#how">How it works</a>
+        <a href="#market">Why us</a>
+      </div>
+      <a class="nav-cta" href="#order">Reserve meals</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="Diet Feast hero">
+      <div class="hero-inner">
+        <p class="eyebrow">Worcester, MA meal prep</p>
+        <h1>Diet Feast</h1>
+        <p class="hero-copy">Fresh, halal-friendly meals that stay between 120-165 calories but eat like a full plate. Built around shirataki noodles, chicken, shrimp, eggs, tofu, paneer, vegetables, and sauces that keep weight loss meals from feeling tiny.</p>
+        <div class="hero-actions">
+          <a class="button" href="#order">Start this week</a>
+          <a class="button secondary" href="#plans">See plans</a>
+        </div>
+        <div class="hero-stats" aria-label="Diet Feast key numbers">
+          <div class="stat"><strong>120-165</strong><span>calories per meal</span></div>
+          <div class="stat"><strong>$8</strong><span>a la carte price</span></div>
+          <div class="stat"><strong>40%</strong><span>cheaper than major meal kits</span></div>
+          <div class="stat"><strong>3 min</strong><span>ready after reheating</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="meals">
+      <p class="section-kicker">What makes it different</p>
+      <h2 class="single-line-heading">Low-calorie meals that still feel generous.</h2>
+      <p class="section-intro">Diet Feast uses shirataki noodles as the high-volume base, then adds clean proteins, vegetables, and simple sauces. The result is a big, ready-to-eat bowl that fits a calorie target without feeling like a compromise.</p>
+      <div class="feature-grid">
+        <article class="feature">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 12c4-7 12-7 16 0-4 7-12 7-16 0Z"/><path d="M12 9v6"/><path d="M9 12h6"/></svg>
+          </div>
+          <h3>Volume without the calories</h3>
+          <p>Shirataki noodles bring the size and texture people miss when dieting, with about 10 calories per pack.</p>
+        </article>
+        <article class="feature">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M5 8c3 0 5-2 7-5 2 3 4 5 7 5"/><path d="M5 16c3 0 5 2 7 5 2-3 4-5 7-5"/></svg>
+          </div>
+          <h3>Halal-friendly proteins</h3>
+          <p>No beef and no pork. Meals rotate between boneless chicken leg meat, shrimp, eggs, tofu, and paneer, with mushrooms and other vegetables for volume.</p>
+        </article>
+        <article class="feature">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/><path d="M7 7l10 10"/><path d="M17 7 7 17"/></svg>
+          </div>
+          <h3>Locally made</h3>
+          <p>Prepared for the Worcester metro area, with local delivery and room for customer feedback as the menu grows.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="ingredient-showcase" aria-labelledby="ingredients-heading">
+      <p class="section-kicker">Ingredient options</p>
+      <h2 class="single-line-heading" id="ingredients-heading">Choose from a focused set of proteins and vegetables.</h2>
+      <p class="section-intro">The wheels show the exact add-on options customers can build around. Hover to pause the spin, or watch the lens catch each ingredient as it passes.</p>
+      <div class="ingredient-wheels">
+        <article class="ingredient-wheel-card" data-wheel-card data-items="🍗 Chicken,🍤 Shrimp,🥚 Egg,🫘 Tofu,🧀 Paneer">
+          <h3>Protein options</h3>
+          <p>Halal-friendly mains and add-ons for bowls that stay filling.</p>
+          <div class="ingredient-lens" data-wheel-lens>🍗 Chicken</div>
+          <div class="ingredient-wheel" style="--items: 5; --spin-time: 18s; --label-radius: -128px; --label-angle: 0deg; --wheel-colors: #0b2a3d 0deg 72deg, #ffd500 72deg 144deg, #d8c9a6 144deg 216deg, #0b2a3d 216deg 288deg, #ffd500 288deg 360deg;" aria-label="Supported protein options">
+            <span class="ingredient-item" style="--index: 0;">🍗 Chicken</span>
+            <span class="ingredient-item" style="--index: 1;">🍤 Shrimp</span>
+            <span class="ingredient-item" style="--index: 2;">🥚 Egg</span>
+            <span class="ingredient-item" style="--index: 3;">🫘 Tofu</span>
+            <span class="ingredient-item" style="--index: 4;">🧀 Paneer</span>
+          </div>
+        </article>
+        <article class="ingredient-wheel-card" data-wheel-card data-items="🥦 Broccoli,🫑 Peppers,🍄 Mushrooms,🥕 Carrots,🥬 Spinach,🥬 Cabbage,🥒 Zucchini,🫛 Beans">
+          <h3>Vegetable options</h3>
+          <p>Fresh vegetables for more volume, color, and texture.</p>
+          <div class="ingredient-lens" data-wheel-lens>🥦 Broccoli</div>
+          <div class="ingredient-wheel" style="--items: 8; --spin-time: 28s; --label-radius: -142px; --label-angle: 0deg; --wheel-colors: #0b2a3d 0deg 45deg, #ffd500 45deg 90deg, #d8c9a6 90deg 135deg, #0b2a3d 135deg 180deg, #ffd500 180deg 225deg, #d8c9a6 225deg 270deg, #0b2a3d 270deg 315deg, #ffd500 315deg 360deg;" aria-label="Supported vegetable options">
+            <span class="ingredient-item" style="--index: 0;">🥦 Broccoli</span>
+            <span class="ingredient-item" style="--index: 1;">🫑 Peppers</span>
+            <span class="ingredient-item" style="--index: 2;">🍄 Mushrooms</span>
+            <span class="ingredient-item" style="--index: 3;">🥕 Carrots</span>
+            <span class="ingredient-item" style="--index: 4;">🥬 Spinach</span>
+            <span class="ingredient-item" style="--index: 5;">🥬 Cabbage</span>
+            <span class="ingredient-item" style="--index: 6;">🥒 Zucchini</span>
+            <span class="ingredient-item" style="--index: 7;">🫛 Beans</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="menu-band">
+      <div class="menu-wrap">
+        <div class="menu-visual">
+          <div class="menu-photo">
+            <img id="recipe-photo" src="assets/images/recipe-chicken-soy-ginger.jpg" alt="Chicken soy-ginger shirataki bowl">
+          </div>
+          <div class="recipe-note" aria-label="Recipe menu highlights">
+            <span>Protein options: chicken, shrimp, eggs, tofu, paneer</span>
+            <span>Fresh vegetable add-ons</span>
+            <span>Click recipes for ingredients and prep</span>
+          </div>
+        </div>
+        <div>
+          <p class="section-kicker">Recipe menu</p>
+          <h2>Twelve shirataki bowls, built from chicken, shrimp, eggs, tofu, paneer, and vegetable-forward options.</h2>
+          <p class="section-intro">The menu stays focused on the startup's core proteins: boneless chicken leg meat, shrimp, eggs, tofu, and paneer. Mushrooms and other vegetables add volume, texture, and flexible swaps.</p>
+          <div class="menu-list">
+            <article class="meal is-active">
+              <button class="meal-toggle" type="button" aria-expanded="true" data-image="assets/images/recipe-chicken-soy-ginger.jpg" data-alt="Chicken soy-ginger shirataki bowl">
+                <span class="meal-dot" aria-hidden="true"></span>
+                <div>
+                  <h3>Grilled Chicken Soy-Ginger</h3>
+                  <p>Boneless chicken leg meat, broccoli, mushrooms, soy sauce, sesame oil, ginger, garlic.</p>
+                  <span class="protein">24g protein</span>
+                </div>
+              <span class="calories">145 cal · $8</span>
+              </button>
+              <div class="meal-details">
+                <div class="meal-details-inner">
+                  <div><h4>Ingredients</h4><ul><li>Shirataki noodles</li><li>Boneless chicken leg meat</li><li>Broccoli and mushrooms</li><li>Soy, sesame, ginger, garlic</li></ul></div>
+                  <div><h4>How it is made</h4><ol><li>Rinse and dry-pan shirataki until chewy.</li><li>Saute mushrooms, broccoli, ginger, and garlic.</li><li>Add cooked chicken, soy, and sesame, then assemble.</li></ol></div>
+                </div>
+              </div>
+            </article>
+            <article class="meal">
+              <button class="meal-toggle" type="button" aria-expanded="false" data-image="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Stir_fried_shrimp_and_shredded_veggies_in_a_chili_garlic_sauce_over_noodles_%286982930541%29.jpg/960px-Stir_fried_shrimp_and_shredded_veggies_in_a_chili_garlic_sauce_over_noodles_%286982930541%29.jpg" data-alt="Shrimp lime-cilantro noodle bowl">
+                <span class="meal-dot" aria-hidden="true"></span>
+                <div>
+                  <h3>Shrimp Lime-Cilantro</h3>
+                  <p>Shrimp, bell peppers, carrots, lime juice, soy sauce, red pepper flakes.</p>
+                  <span class="protein">22g protein</span>
+                </div>
+              <span class="calories">160 cal · $8</span>
+              </button>
+              <div class="meal-details">
+                <div class="meal-details-inner">
+                  <div><h4>Ingredients</h4><ul><li>Shirataki noodles</li><li>Cooked shrimp</li><li>Bell peppers and carrots</li><li>Lime, soy, sesame, cilantro</li></ul></div>
+                  <div><h4>How it is made</h4><ol><li>Dry-pan the noodles after rinsing.</li><li>Whisk lime, soy, sesame, and chili flakes.</li><li>Toss shrimp and vegetables in sauce, then layer over noodles.</li></ol></div>
+                </div>
+              </div>
+            </article>
+            <article class="meal">
+              <button class="meal-toggle" type="button" aria-expanded="false" data-image="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Egg_fried_rice.jpg/960px-Egg_fried_rice.jpg" data-alt="Egg fried noodles style shirataki bowl">
+                <span class="meal-dot" aria-hidden="true"></span>
+                <div>
+                  <h3>Egg Fried Noodles</h3>
+                  <p>Eggs, mixed vegetables, onion, soy sauce, sesame oil, ginger, garlic.</p>
+                  <span class="protein">18g protein</span>
+                </div>
+              <span class="calories">140 cal · $8</span>
+              </button>
+              <div class="meal-details">
+                <div class="meal-details-inner">
+                  <div><h4>Ingredients</h4><ul><li>Shirataki noodles</li><li>Two eggs</li><li>Mixed vegetables and onion</li><li>Soy, sesame, ginger, garlic</li></ul></div>
+                  <div><h4>How it is made</h4><ol><li>Dry the noodles in a hot pan.</li><li>Scramble eggs and saute vegetables.</li><li>Combine with soy sauce and heat through.</li></ol></div>
+                </div>
+              </div>
+            </article>
+            <article class="meal">
+              <button class="meal-toggle" type="button" aria-expanded="false" data-image="assets/images/recipe-tofu-miso.jpg" data-alt="Tofu miso shirataki soup bowl">
+                <span class="meal-dot" aria-hidden="true"></span>
+                <div>
+                  <h3>Tofu Miso</h3>
+                  <p>Firm tofu, bok choy or spinach, mushrooms, miso, broth, garlic, ginger.</p>
+                  <span class="protein">18g protein</span>
+                </div>
+              <span class="calories">150 cal · $8</span>
+              </button>
+              <div class="meal-details">
+                <div class="meal-details-inner">
+                  <div><h4>Ingredients</h4><ul><li>Shirataki noodles</li><li>Firm tofu</li><li>Spinach or bok choy, mushrooms</li><li>Miso, broth, garlic, ginger</li></ul></div>
+                  <div><h4>How it is made</h4><ol><li>Dry-pan the noodles and sear tofu lightly.</li><li>Dissolve miso into warm broth.</li><li>Wilt greens, add tofu and noodles, then pour in broth.</li></ol></div>
+                </div>
+              </div>
+            </article>
+            <article class="meal">
+              <button class="meal-toggle" type="button" aria-expanded="false" data-image="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Vietnamese_Shrimp_and_Vegetable_noodle_soup.jpg/960px-Vietnamese_Shrimp_and_Vegetable_noodle_soup.jpg" data-alt="Shrimp Thai broth shirataki bowl">
+                <span class="meal-dot" aria-hidden="true"></span>
+                <div>
+                  <h3>Shrimp Thai Broth</h3>
+                  <p>Shrimp, mixed vegetables, onion, broth, soy sauce, Thai red curry paste.</p>
+                  <span class="protein">21g protein</span>
+                </div>
+              <span class="calories">155 cal · $8</span>
+              </button>
+              <div class="meal-details">
+                <div class="meal-details-inner">
+                  <div><h4>Ingredients</h4><ul><li>Shirataki noodles</li><li>Cooked shrimp</li><li>Bell pepper, mushrooms, snap peas</li><li>Broth, soy, red curry paste</li></ul></div>
+                  <div><h4>How it is made</h4><ol><li>Warm broth with soy and curry paste.</li><li>Saute onion, garlic, ginger, and vegetables.</li><li>Add shrimp, noodles, and broth; heat gently.</li></ol></div>
+                </div>
+              </div>
+            </article>
+            <article class="meal">
+              <button class="meal-toggle" type="button" aria-expanded="false" data-image="assets/images/recipe-chicken-tikka.jpg" data-alt="Chicken tikka shirataki bowl">
+                <span class="meal-dot" aria-hidden="true"></span>
+                <div>
+                  <h3>Chicken Tikka</h3>
+                  <p>Boneless chicken leg meat, bell peppers, onion, Greek yogurt, garam masala, turmeric.</p>
+                  <span class="protein">25g protein</span>
+                </div>
+              <span class="calories">160 cal · $8</span>
+              </button>
+              <div class="meal-details">
+                <div class="meal-details-inner">
+                  <div><h4>Ingredients</h4><ul><li>Shirataki noodles</li><li>Boneless chicken leg meat</li><li>Bell peppers and onion</li><li>Greek yogurt, garam masala, turmeric</li></ul></div>
+                  <div><h4>How it is made</h4><ol><li>Make a light yogurt tikka sauce.</li><li>Saute onion, peppers, garlic, and ginger.</li><li>Toss chicken and noodles with sauce until coated.</li></ol></div>
+                </div>
+              </div>
+            </article>
+            <article class="meal">
+              <button class="meal-toggle" type="button" aria-expanded="false" data-image="assets/images/recipe-chicken-soy-ginger.jpg" data-alt="Chicken fajita lime shirataki bowl">
+                <span class="meal-dot" aria-hidden="true"></span>
+                <div>
+                  <h3>Chicken Fajita Lime</h3>
+                  <p>Boneless chicken leg meat, bell peppers, onion, zucchini, lime, cumin, chili powder.</p>
+                  <span class="protein">23g protein</span>
+                </div>
+              <span class="calories">165 cal · $8</span>
+              </button>
+              <div class="meal-details">
+                <div class="meal-details-inner">
+                  <div><h4>Ingredients</h4><ul><li>Shirataki noodles</li><li>Boneless chicken leg meat</li><li>Bell peppers, onion, zucchini</li><li>Lime juice, cumin, chili powder</li></ul></div>
+                  <div><h4>How it is made</h4><ol><li>Dry-pan noodles separately.</li><li>Saute peppers, onion, and zucchini with spices.</li><li>Add chicken and lime, then combine with noodles.</li></ol></div>
+                </div>
+              </div>
+            </article>
+            <article class="meal">
+              <button class="meal-toggle" type="button" aria-expanded="false" data-image="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Stir_fried_shrimp_and_shredded_veggies_in_a_chili_garlic_sauce_over_noodles_%286982930541%29.jpg/960px-Stir_fried_shrimp_and_shredded_veggies_in_a_chili_garlic_sauce_over_noodles_%286982930541%29.jpg" data-alt="Shrimp garlic green bean shirataki bowl">
+                <span class="meal-dot" aria-hidden="true"></span>
+                <div>
+                  <h3>Shrimp Garlic Green Bean</h3>
+                  <p>Shrimp, green beans, cabbage, mushrooms, garlic, soy sauce, lemon.</p>
+                  <span class="protein">22g protein</span>
+                </div>
+              <span class="calories">150 cal · $8</span>
+              </button>
+              <div class="meal-details">
+                <div class="meal-details-inner">
+                  <div><h4>Ingredients</h4><ul><li>Shirataki noodles</li><li>Cooked shrimp</li><li>Green beans, cabbage, mushrooms</li><li>Garlic, soy sauce, lemon juice</li></ul></div>
+                  <div><h4>How it is made</h4><ol><li>Dry noodles until firm and glossy.</li><li>Saute green beans first, then cabbage and mushrooms.</li><li>Add shrimp, garlic, soy, and lemon; assemble hot.</li></ol></div>
+                </div>
+              </div>
+            </article>
+            <article class="meal">
+              <button class="meal-toggle" type="button" aria-expanded="false" data-image="assets/images/recipe-tofu-miso.jpg" data-alt="Tofu teriyaki broccoli shirataki bowl">
+                <span class="meal-dot" aria-hidden="true"></span>
+                <div>
+                  <h3>Tofu Teriyaki Broccoli</h3>
+                  <p>Firm tofu, broccoli, carrots, mushrooms, low-sodium teriyaki, ginger.</p>
+                  <span class="protein">18g protein</span>
+                </div>
+              <span class="calories">165 cal · $8</span>
+              </button>
+              <div class="meal-details">
+                <div class="meal-details-inner">
+                  <div><h4>Ingredients</h4><ul><li>Shirataki noodles</li><li>Firm tofu</li><li>Broccoli, carrots, mushrooms</li><li>Low-sodium teriyaki, ginger, garlic</li></ul></div>
+                  <div><h4>How it is made</h4><ol><li>Pan-sear tofu cubes until lightly golden.</li><li>Stir-fry broccoli, carrots, and mushrooms.</li><li>Toss with noodles and teriyaki glaze.</li></ol></div>
+                </div>
+              </div>
+            </article>
+            <article class="meal">
+              <button class="meal-toggle" type="button" aria-expanded="false" data-image="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Egg_fried_rice.jpg/960px-Egg_fried_rice.jpg" data-alt="Egg spinach mushroom shirataki bowl">
+                <span class="meal-dot" aria-hidden="true"></span>
+                <div>
+                  <h3>Egg Spinach Mushroom</h3>
+                  <p>Eggs, spinach, mushrooms, onion, garlic, black pepper, light soy sauce.</p>
+                  <span class="protein">18g protein</span>
+                </div>
+              <span class="calories">145 cal · $8</span>
+              </button>
+              <div class="meal-details">
+                <div class="meal-details-inner">
+                  <div><h4>Ingredients</h4><ul><li>Shirataki noodles</li><li>Eggs</li><li>Spinach, mushrooms, onion</li><li>Garlic, black pepper, light soy sauce</li></ul></div>
+                  <div><h4>How it is made</h4><ol><li>Dry-pan noodles and set aside.</li><li>Saute onion and mushrooms, then wilt spinach.</li><li>Scramble eggs into the vegetables and fold in noodles.</li></ol></div>
+                </div>
+              </div>
+            </article>
+            <article class="meal">
+              <button class="meal-toggle" type="button" aria-expanded="false" data-image="assets/images/recipe-chicken-tikka.jpg" data-alt="Paneer tikka shirataki noodle bowl">
+                <span class="meal-dot" aria-hidden="true"></span>
+                <div>
+                  <h3>Paneer Tikka Noodles</h3>
+                  <p>Paneer, bell peppers, onion, Greek yogurt, garam masala, turmeric, garlic.</p>
+                  <span class="protein">14g protein</span>
+                </div>
+              <span class="calories">165 cal Â· $8</span>
+              </button>
+              <div class="meal-details">
+                <div class="meal-details-inner">
+                  <div><h4>Ingredients</h4><ul><li>Shirataki noodles</li><li>Paneer cubes</li><li>Bell peppers and onion</li><li>Greek yogurt, garam masala, turmeric</li></ul></div>
+                  <div><h4>How it is made</h4><ol><li>Dry-pan noodles until chewy.</li><li>Sear paneer cubes lightly with tikka spices.</li><li>Saute peppers and onion, then fold everything into the light yogurt sauce.</li></ol></div>
+                </div>
+              </div>
+            </article>
+            <article class="meal">
+              <button class="meal-toggle" type="button" aria-expanded="false" data-image="assets/images/recipe-tofu-miso.jpg" data-alt="Mushroom garlic pepper shirataki noodle bowl">
+                <span class="meal-dot" aria-hidden="true"></span>
+                <div>
+                  <h3>Mushroom Garlic Pepper</h3>
+                  <p>Mushrooms, spinach, cabbage, onion, garlic, black pepper, light soy sauce.</p>
+                  <span class="protein">10g protein</span>
+                </div>
+              <span class="calories">120 cal Â· $8</span>
+              </button>
+              <div class="meal-details">
+                <div class="meal-details-inner">
+                  <div><h4>Ingredients</h4><ul><li>Shirataki noodles</li><li>Mixed mushrooms</li><li>Spinach, cabbage, onion</li><li>Garlic, black pepper, light soy</li></ul></div>
+                  <div><h4>How it is made</h4><ol><li>Dry-pan noodles and set aside.</li><li>Saute mushrooms until browned, then add onion and cabbage.</li><li>Wilt spinach, add garlic-pepper soy sauce, and toss with noodles.</li></ol></div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="plans">
+      <p class="section-kicker">Membership plans</p>
+      <h2>Two weekday meals a day, flexible weekends.</h2>
+      <p class="section-intro">Plans are built around Monday-Friday lunch and dinner so customers can stay consistent twice a day during the week and keep weekends flexible for cheat days, family meals, or a la carte orders.</p>
+      <div class="plans">
+        <article class="plan">
+          <span class="badge">Starter</span>
+          <h3>Weekly Kickstart</h3>
+          <div class="price">$70 <span>/ month</span></div>
+          <p>10 meals for one weekday week each month.</p>
+          <ul>
+            <li>2 meals per day for 5 weekdays</li>
+            <li>$7 per meal inside plan</li>
+            <li>Ideal for first-time customers</li>
+          </ul>
+        </article>
+        <article class="plan popular">
+          <span class="badge">Most popular</span>
+          <h3>Two-Week Reset</h3>
+          <div class="price">$130 <span>/ month</span></div>
+          <p>20 weekday meals across two weeks.</p>
+          <ul>
+            <li>2 meals per day for 10 weekdays</li>
+            <li>$6.50 per meal inside plan</li>
+            <li>Best fit for active weight loss</li>
+          </ul>
+        </article>
+        <article class="plan">
+          <span class="badge">Premium</span>
+          <h3>Month Strong</h3>
+          <div class="price">$240 <span>/ month</span></div>
+          <p>40 weekday meals, priority scheduling, and steady twice-daily structure.</p>
+          <ul>
+            <li>2 meals per day for 20 weekdays</li>
+            <li>$6 per meal inside plan</li>
+            <li>Priority for limited batches</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="how">
+      <p class="section-kicker">How it works</p>
+      <h2>Fresh prep without the weekly kitchen marathon.</h2>
+      <p class="section-intro">Diet Feast is designed for small-batch operations at launch: focused cooking, fast assembly, direct communication, and delivery around Worcester.</p>
+      <div class="how-it-works">
+        <article class="step">
+          <div class="step-number">1</div>
+          <h3>Choose meals</h3>
+          <p>Pick a plan or order a la carte at $8 per meal.</p>
+        </article>
+        <article class="step">
+          <div class="step-number">2</div>
+          <h3>Batch cooked</h3>
+          <p>Proteins and vegetables are prepped in efficient small batches.</p>
+        </article>
+        <article class="step">
+          <div class="step-number">3</div>
+          <h3>Delivered local</h3>
+          <p>Meals are packed and delivered within the Worcester metro area.</p>
+        </article>
+        <article class="step">
+          <div class="step-number">4</div>
+          <h3>Heat and eat</h3>
+          <p>Microwave for 2-3 minutes and stay inside your calorie target.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="market">
+      <p class="section-kicker">Why Worcester customers choose it</p>
+      <h2>Made for people who are serious about weight loss, fitness, and convenience.</h2>
+      <div class="proof">
+        <article class="proof-card">
+          <h3>For fitness enthusiasts</h3>
+          <p><strong>High volume, low calorie</strong> meals help gym members stay full while cutting or maintaining their targets.</p>
+        </article>
+        <article class="proof-card">
+          <h3>For weight loss seekers</h3>
+          <p><strong>No tiny portions.</strong> The product promise is emotional as much as nutritional: food that feels satisfying.</p>
+        </article>
+        <article class="proof-card">
+          <h3>For busy professionals</h3>
+          <p><strong>Ready in minutes</strong> for healthcare workers, students, office teams, and anyone tired of prepping every night.</p>
+        </article>
+        <article class="proof-card">
+          <h3>For halal-conscious customers</h3>
+          <p><strong>No beef, no pork</strong> with chicken, shrimp, eggs, tofu, paneer, and mushrooms across the menu.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="order" class="order-shell" aria-labelledby="order-heading">
+      <div class="order-heading">
+        <p class="section-kicker">Order online</p>
+        <h2 id="order-heading">Submit your order online now.</h2>
+      </div>
+
+      <aside class="lead" aria-label="Ordering portal">
+        <div class="lead-copy">
+          <p class="section-kicker">Ordering portal</p>
+          <h2>Build your Diet Feast order.</h2>
+          <p>Select a recipe, add extra approved proteins or fresh vegetables, and send the request. Every order is cash on delivery and must be confirmed by phone before it is prepared.</p>
+          <div class="order-rules">
+            <div class="order-rule">Payment is always cash on delivery.</div>
+            <div class="order-rule">Diet Feast will call you after the request. You must answer or call back to confirm the order is real.</div>
+            <div class="order-rule">By confirming, you agree to pay the final order total when the meal is delivered.</div>
+          </div>
+        </div>
+        <div class="lead-panel">
+        <form id="order-form">
+          <div class="order-grid">
+          <label class="half-field">
+            Name
+            <input type="text" name="name" autocomplete="name" placeholder="Your name" required>
+          </label>
+          <label class="half-field">
+            Phone number
+            <input type="tel" name="phone" autocomplete="tel" placeholder="Phone for confirmation call" required>
+          </label>
+          <label class="half-field">
+            Recipe
+            <select name="recipe" required>
+              <option value="">Choose a recipe</option>
+              <option value="Grilled Chicken Soy-Ginger">Grilled Chicken Soy-Ginger (145 cal)</option>
+              <option value="Shrimp Lime-Cilantro">Shrimp Lime-Cilantro (160 cal)</option>
+              <option value="Egg Fried Noodles">Egg Fried Noodles (140 cal)</option>
+              <option value="Tofu Miso">Tofu Miso (150 cal)</option>
+              <option value="Shrimp Thai Broth">Shrimp Thai Broth (155 cal)</option>
+              <option value="Chicken Tikka">Chicken Tikka (160 cal)</option>
+              <option value="Chicken Fajita Lime">Chicken Fajita Lime (165 cal)</option>
+              <option value="Shrimp Garlic Green Bean">Shrimp Garlic Green Bean (150 cal)</option>
+              <option value="Tofu Teriyaki Broccoli">Tofu Teriyaki Broccoli (165 cal)</option>
+              <option value="Egg Spinach Mushroom">Egg Spinach Mushroom (145 cal)</option>
+              <option value="Paneer Tikka Noodles">Paneer Tikka Noodles (165 cal)</option>
+              <option value="Mushroom Garlic Pepper">Mushroom Garlic Pepper (120 cal)</option>
+            </select>
+          </label>
+          <label class="half-field">
+            Quantity
+            <select name="quantity" required>
+              <option>1 meal</option>
+              <option>2 meals</option>
+              <option>3 meals</option>
+              <option>4 meals</option>
+              <option>5 meals</option>
+            </select>
+          </label>
+          <fieldset class="option-fieldset full-field">
+            <legend>Add extra protein</legend>
+            <p class="option-hint">Extra proteins are paid add-ons because one main protein is already included with the selected recipe.</p>
+            <div class="option-grid">
+              <div class="addon-option"><label class="check-option"><input type="checkbox" name="protein" value="Extra chicken" data-addon-name="Extra chicken" data-calories="100" data-cost="2.00" data-grams="56"> Chicken 56g (+100 cal, +$2 ea)</label><input class="addon-qty" type="number" min="1" max="3" value="1" aria-label="Extra chicken quantity" disabled></div>
+              <div class="addon-option"><label class="check-option"><input type="checkbox" name="protein" value="Extra shrimp" data-addon-name="Extra shrimp" data-calories="56" data-cost="2.00" data-grams="56"> Shrimp 56g (+56 cal, +$2 ea)</label><input class="addon-qty" type="number" min="1" max="3" value="1" aria-label="Extra shrimp quantity" disabled></div>
+              <div class="addon-option"><label class="check-option"><input type="checkbox" name="protein" value="Extra egg" data-addon-name="Extra egg" data-calories="70" data-cost="1.00" data-grams="50"> Egg 50g (+70 cal, +$1 ea)</label><input class="addon-qty" type="number" min="1" max="3" value="1" aria-label="Extra egg quantity" disabled></div>
+              <div class="addon-option"><label class="check-option"><input type="checkbox" name="protein" value="Extra tofu" data-addon-name="Extra tofu" data-calories="45" data-cost="1.00" data-grams="56"> Tofu 56g (+45 cal, +$1 ea)</label><input class="addon-qty" type="number" min="1" max="3" value="1" aria-label="Extra tofu quantity" disabled></div>
+              <div class="addon-option"><label class="check-option"><input type="checkbox" name="protein" value="Extra paneer" data-addon-name="Extra paneer" data-calories="150" data-cost="2.00" data-grams="56"> Paneer 56g (+150 cal, +$2 ea)</label><input class="addon-qty" type="number" min="1" max="3" value="1" aria-label="Extra paneer quantity" disabled></div>
+            </div>
+          </fieldset>
+          <fieldset class="option-fieldset full-field">
+            <legend>Add vegetables</legend>
+            <p class="option-hint" id="veggie-swap-note">Vegetable add-ons are $0.50 each. Select any veggie to remove from the base recipe to unlock a free replacement veggie.</p>
+            <div class="option-grid">
+              <label class="check-option"><input type="checkbox" name="veggie-swap" value="No broccoli" data-free-veggie-credit="1"> No broccoli</label>
+              <label class="check-option"><input type="checkbox" name="veggie-swap" value="No peppers" data-free-veggie-credit="1"> No peppers</label>
+              <label class="check-option"><input type="checkbox" name="veggie-swap" value="No mushrooms" data-free-veggie-credit="1"> No mushrooms</label>
+              <label class="check-option"><input type="checkbox" name="veggie-swap" value="No carrots" data-free-veggie-credit="1"> No carrots</label>
+              <label class="check-option"><input type="checkbox" name="veggie-swap" value="No spinach" data-free-veggie-credit="1"> No spinach</label>
+              <label class="check-option"><input type="checkbox" name="veggie-swap" value="No cabbage" data-free-veggie-credit="1"> No cabbage</label>
+              <label class="check-option"><input type="checkbox" name="veggie-swap" value="No zucchini" data-free-veggie-credit="1"> No zucchini</label>
+              <label class="check-option"><input type="checkbox" name="veggie-swap" value="No beans" data-free-veggie-credit="1"> No beans</label>
+            </div>
+            <div class="option-grid">
+              <div class="addon-option"><label class="check-option"><input type="checkbox" name="veggie" value="Broccoli" data-addon-name="Broccoli" data-calories="17" data-cost="0.50" data-grams="50"> Broccoli 50g <span class="option-meta" data-paid-text="(+17 cal, +$0.50 ea)">(+17 cal, +$0.50 ea)</span></label><input class="addon-qty" type="number" min="1" max="3" value="1" aria-label="Broccoli quantity" disabled></div>
+              <div class="addon-option"><label class="check-option"><input type="checkbox" name="veggie" value="Bell peppers" data-addon-name="Bell peppers" data-calories="16" data-cost="0.50" data-grams="50"> Peppers 50g <span class="option-meta" data-paid-text="(+16 cal, +$0.50 ea)">(+16 cal, +$0.50 ea)</span></label><input class="addon-qty" type="number" min="1" max="3" value="1" aria-label="Peppers quantity" disabled></div>
+              <div class="addon-option"><label class="check-option"><input type="checkbox" name="veggie" value="Mushrooms" data-addon-name="Mushrooms" data-calories="11" data-cost="0.50" data-grams="50"> Mushrooms 50g <span class="option-meta" data-paid-text="(+11 cal, +$0.50 ea)">(+11 cal, +$0.50 ea)</span></label><input class="addon-qty" type="number" min="1" max="3" value="1" aria-label="Mushrooms quantity" disabled></div>
+              <div class="addon-option"><label class="check-option"><input type="checkbox" name="veggie" value="Carrots" data-addon-name="Carrots" data-calories="20" data-cost="0.50" data-grams="50"> Carrots 50g <span class="option-meta" data-paid-text="(+20 cal, +$0.50 ea)">(+20 cal, +$0.50 ea)</span></label><input class="addon-qty" type="number" min="1" max="3" value="1" aria-label="Carrots quantity" disabled></div>
+              <div class="addon-option"><label class="check-option"><input type="checkbox" name="veggie" value="Spinach" data-addon-name="Spinach" data-calories="12" data-cost="0.50" data-grams="50"> Spinach 50g <span class="option-meta" data-paid-text="(+12 cal, +$0.50 ea)">(+12 cal, +$0.50 ea)</span></label><input class="addon-qty" type="number" min="1" max="3" value="1" aria-label="Spinach quantity" disabled></div>
+              <div class="addon-option"><label class="check-option"><input type="checkbox" name="veggie" value="Cabbage" data-addon-name="Cabbage" data-calories="13" data-cost="0.50" data-grams="50"> Cabbage 50g <span class="option-meta" data-paid-text="(+13 cal, +$0.50 ea)">(+13 cal, +$0.50 ea)</span></label><input class="addon-qty" type="number" min="1" max="3" value="1" aria-label="Cabbage quantity" disabled></div>
+              <div class="addon-option"><label class="check-option"><input type="checkbox" name="veggie" value="Zucchini" data-addon-name="Zucchini" data-calories="9" data-cost="0.50" data-grams="50"> Zucchini 50g <span class="option-meta" data-paid-text="(+9 cal, +$0.50 ea)">(+9 cal, +$0.50 ea)</span></label><input class="addon-qty" type="number" min="1" max="3" value="1" aria-label="Zucchini quantity" disabled></div>
+              <div class="addon-option"><label class="check-option"><input type="checkbox" name="veggie" value="Green beans" data-addon-name="Green beans" data-calories="18" data-cost="0.50" data-grams="50"> Beans 50g <span class="option-meta" data-paid-text="(+18 cal, +$0.50 ea)">(+18 cal, +$0.50 ea)</span></label><input class="addon-qty" type="number" min="1" max="3" value="1" aria-label="Beans quantity" disabled></div>
+            </div>
+          </fieldset>
+          <div class="order-summary full-field" aria-live="polite">
+            <div class="summary-topline">
+              <div class="summary-chip"><span>Meal price</span><strong id="summary-price">$0.00</strong></div>
+              <div class="summary-chip"><span>Total calories</span><strong id="summary-calories">0 cal</strong></div>
+              <div class="summary-chip"><span>Selected recipe</span><strong id="summary-recipe">Choose one</strong></div>
+              <div class="summary-chip" id="delivery-fee-chip" hidden><span>Delivery fee</span><strong id="summary-delivery">—</strong></div>
+            </div>
+            <table class="ingredient-table">
+              <thead>
+                <tr>
+                  <th>Ingredient</th>
+                  <th>Grams</th>
+                  <th>Calories</th>
+                </tr>
+              </thead>
+              <tbody id="ingredient-breakdown">
+                <tr><td colspan="3">Choose a recipe to see ingredient details.</td></tr>
+              </tbody>
+            </table>
+            <p class="summary-note">Calories are estimates and may change slightly by brand, exact portion, and final cooked weight.</p>
+          </div>
+          <label class="full-field">
+            Delivery address
+            <input type="text" name="address" autocomplete="street-address" placeholder="Street, city, ZIP" required>
+          </label>
+          <p class="form-note full-field" id="delivery-info" hidden></p>
+          <label class="full-field">
+            Notes
+            <textarea name="notes" placeholder="Allergies, spice level, delivery window, or special requests"></textarea>
+          </label>
+          <label class="check-option agreement full-field">
+            <input type="checkbox" name="agreement" required>
+            I understand this order is cash on delivery. I agree that Diet Feast will call me to confirm this is a real order, and I must respond before the meal is prepared.
+          </label>
+          <button class="button full-field" type="submit">Order now</button>
+          <p class="form-note full-field" id="order-status">No online payment is collected. Final confirmation happens by phone.</p>
+          </div>
+        </form>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <img src="assets/images/diet_feast_logo.png" alt="Diet Feast" style="height:32px;width:auto;border-radius:6px;opacity:0.75;">
+      <span>Diet Feast - Worcester, Massachusetts</span>
+      <span>120-165 calorie meal prep, fresh and halal-friendly.</span>
+      <span>Food photos: Geoff Peters, Craig Dugas via Wikimedia Commons.</span>
+    </div>
+  </footer>
+
+  <script>
+    const recipePhoto = document.querySelector("#recipe-photo");
+    const mealButtons = document.querySelectorAll(".meal-toggle");
+    const ingredientWheelCards = document.querySelectorAll("[data-wheel-card]");
+    let currentDeliveryFee = 0;
+    let currentDeliveryMiles = 0;
+    let deliveryCalculated = false;
+    let cachedOriginCoords = null;
+
+    ingredientWheelCards.forEach((card) => {
+      const lens = card.querySelector("[data-wheel-lens]");
+      const wheel = card.querySelector(".ingredient-wheel");
+      const items = (card.dataset.items || "").split(",").filter(Boolean);
+      const duration = Number.parseFloat(getComputedStyle(wheel).getPropertyValue("--spin-time")) || 18;
+
+      if (!lens || !items.length) return;
+
+      const updateLens = () => {
+        const elapsedSeconds = performance.now() / 1000;
+        const progress = (elapsedSeconds % duration) / duration;
+        const rawIndex = -0.5 - (progress * items.length);
+        const activeIndex = ((Math.round(rawIndex) % items.length) + items.length) % items.length;
+        lens.textContent = items[activeIndex];
+      };
+
+      updateLens();
+      window.setInterval(updateLens, 250);
+    });
+
+    const meals = document.querySelectorAll(".meal");
+    let activeMealIndex = 0;
+
+    const activateMeal = (index) => {
+      activeMealIndex = index;
+      meals.forEach((item, i) => {
+        const isTarget = i === index;
+        item.classList.toggle("is-active", isTarget);
+        item.querySelector(".meal-toggle").setAttribute("aria-expanded", String(isTarget));
+      });
+      const button = meals[index]?.querySelector(".meal-toggle");
+      if (!button || !recipePhoto) return;
+      const nextImage = button.dataset.image;
+      const nextAlt = button.dataset.alt;
+      if (recipePhoto.getAttribute("src") !== nextImage) {
+        recipePhoto.classList.add("is-swapping");
+        window.setTimeout(() => {
+          recipePhoto.src = nextImage;
+          recipePhoto.alt = nextAlt;
+        }, 140);
+      }
+    };
+
+    let autoTimer = window.setInterval(() => {
+      activateMeal((activeMealIndex + 1) % meals.length);
+    }, 10000);
+
+    mealButtons.forEach((button, idx) => {
+      button.addEventListener("click", () => {
+        clearInterval(autoTimer);
+        const meal = button.closest(".meal");
+        const clickedIndex = [...meals].indexOf(meal);
+        const isOpen = meal.classList.contains("is-active");
+        if (isOpen) {
+          meal.classList.remove("is-active");
+          button.setAttribute("aria-expanded", "false");
+        } else {
+          activateMeal(clickedIndex);
+        }
+        autoTimer = window.setInterval(() => {
+          activateMeal((activeMealIndex + 1) % meals.length);
+        }, 10000);
+      });
+    });
+
+    if (recipePhoto) {
+      recipePhoto.addEventListener("load", () => {
+        recipePhoto.classList.remove("is-swapping");
+      });
+    }
+
+    const recipeData = {
+      "Grilled Chicken Soy-Ginger": {
+        calories: 145,
+        price: 8,
+        ingredients: [
+          ["Shirataki noodles", 198, 10],
+          ["Boneless chicken leg meat", 85, 90],
+          ["Broccoli", 91, 31],
+          ["Mushrooms", 35, 8],
+          ["Soy, sesame, ginger, garlic", 24, 6]
+        ]
+      },
+      "Shrimp Lime-Cilantro": {
+        calories: 160,
+        price: 8,
+        ingredients: [
+          ["Shirataki noodles", 198, 10],
+          ["Shrimp", 113, 100],
+          ["Bell peppers", 75, 24],
+          ["Carrots", 55, 23],
+          ["Lime, soy, sesame, cilantro", 28, 3]
+        ]
+      },
+      "Egg Fried Noodles": {
+        calories: 140,
+        price: 8,
+        ingredients: [
+          ["Shirataki noodles", 198, 10],
+          ["Egg", 50, 70],
+          ["Mixed vegetables", 40, 24],
+          ["Onion", 20, 8],
+          ["Soy, sesame, ginger, garlic", 18, 28]
+        ]
+      },
+      "Tofu Miso": {
+        calories: 150,
+        price: 8,
+        ingredients: [
+          ["Shirataki noodles", 198, 10],
+          ["Firm tofu", 113, 90],
+          ["Spinach or bok choy", 60, 14],
+          ["Mushrooms", 35, 8],
+          ["Miso broth, sesame, garlic, ginger", 140, 28]
+        ]
+      },
+      "Shrimp Thai Broth": {
+        calories: 155,
+        price: 8,
+        ingredients: [
+          ["Shirataki noodles", 198, 10],
+          ["Shrimp", 113, 100],
+          ["Bell pepper, mushrooms, snap peas", 70, 20],
+          ["Onion", 20, 8],
+          ["Broth, soy, curry paste, sesame", 140, 17]
+        ]
+      },
+      "Chicken Tikka": {
+        calories: 160,
+        price: 8,
+        ingredients: [
+          ["Shirataki noodles", 198, 10],
+          ["Boneless chicken leg meat", 85, 90],
+          ["Bell peppers", 75, 24],
+          ["Onion", 40, 16],
+          ["Greek yogurt, spices, sesame", 42, 20]
+        ]
+      },
+      "Chicken Fajita Lime": {
+        calories: 165,
+        price: 8,
+        ingredients: [
+          ["Shirataki noodles", 198, 10],
+          ["Boneless chicken leg meat", 85, 90],
+          ["Bell peppers", 75, 24],
+          ["Onion and zucchini", 80, 24],
+          ["Lime, cumin, chili powder", 12, 17]
+        ]
+      },
+      "Shrimp Garlic Green Bean": {
+        calories: 150,
+        price: 8,
+        ingredients: [
+          ["Shirataki noodles", 198, 10],
+          ["Shrimp", 113, 100],
+          ["Green beans", 60, 21],
+          ["Cabbage and mushrooms", 70, 16],
+          ["Garlic, soy, lemon", 18, 3]
+        ]
+      },
+      "Tofu Teriyaki Broccoli": {
+        calories: 165,
+        price: 8,
+        ingredients: [
+          ["Shirataki noodles", 198, 10],
+          ["Firm tofu", 113, 90],
+          ["Broccoli", 91, 31],
+          ["Carrots and mushrooms", 75, 24],
+          ["Low-sodium teriyaki, ginger, garlic", 28, 10]
+        ]
+      },
+      "Egg Spinach Mushroom": {
+        calories: 145,
+        price: 8,
+        ingredients: [
+          ["Shirataki noodles", 198, 10],
+          ["Egg", 50, 70],
+          ["Spinach", 50, 12],
+          ["Mushrooms and onion", 75, 30],
+          ["Garlic, pepper, light soy", 18, 23]
+        ]
+      },
+      "Paneer Tikka Noodles": {
+        calories: 165,
+        price: 8,
+        ingredients: [
+          ["Shirataki noodles", 198, 10],
+          ["Paneer", 35, 94],
+          ["Bell peppers", 75, 24],
+          ["Onion", 40, 16],
+          ["Greek yogurt, spices, garlic", 42, 21]
+        ]
+      },
+      "Mushroom Garlic Pepper": {
+        calories: 120,
+        price: 8,
+        ingredients: [
+          ["Shirataki noodles", 198, 10],
+          ["Mixed mushrooms", 140, 31],
+          ["Spinach", 50, 12],
+          ["Cabbage and onion", 95, 32],
+          ["Garlic, pepper, light soy", 24, 35]
+        ]
+      }
+    };
+
+    const updateOrderSummary = () => {
+      if (!orderForm) return;
+
+      const formData = new FormData(orderForm);
+      const recipeName = formData.get("recipe");
+      const quantityText = formData.get("quantity") || "1 meal";
+      const quantity = Number.parseInt(quantityText, 10) || 1;
+      const recipe = recipeData[recipeName];
+      const breakdown = document.querySelector("#ingredient-breakdown");
+      const priceEl = document.querySelector("#summary-price");
+      const caloriesEl = document.querySelector("#summary-calories");
+      const recipeEl = document.querySelector("#summary-recipe");
+      const veggieNote = document.querySelector("#veggie-swap-note");
+      const getAddonQty = (input) => {
+        const qtyInput = input.closest(".addon-option")?.querySelector(".addon-qty");
+        if (qtyInput) qtyInput.disabled = !input.checked;
+        if (!input.checked) return 0;
+
+        const parsedQty = Number.parseInt(qtyInput?.value, 10) || 1;
+        return Math.min(Math.max(parsedQty, 1), 3);
+      };
+      const freeVeggieCredits = [...orderForm.querySelectorAll('input[name="veggie-swap"]:checked')].length;
+      const veggieInputs = [...orderForm.querySelectorAll('input[name="veggie"][data-calories]')];
+      const selectedVeggiePortions = veggieInputs.reduce((sum, input) => sum + getAddonQty(input), 0);
+
+      veggieInputs.forEach((input) => {
+        const meta = input.closest("label")?.querySelector(".option-meta");
+        if (!meta) return;
+
+        const qty = getAddonQty(input);
+        const previousPortions = veggieInputs
+          .slice(0, veggieInputs.indexOf(input))
+          .reduce((sum, item) => sum + getAddonQty(item), 0);
+        const freePortionsForItem = Math.max(Math.min(freeVeggieCredits - previousPortions, qty), 0);
+        const hasUnusedCredit = freeVeggieCredits > selectedVeggiePortions;
+
+        if (freePortionsForItem > 0) {
+          meta.textContent = `(${freePortionsForItem} free veggie swap${freePortionsForItem === 1 ? "" : "s"})`;
+          meta.classList.add("is-free");
+        } else if (qty === 0 && hasUnusedCredit) {
+          meta.textContent = "(select 1 free veggie)";
+          meta.classList.add("is-free");
+        } else {
+          meta.textContent = meta.dataset.paidText;
+          meta.classList.remove("is-free");
+        }
+      });
+
+      if (veggieNote) {
+        if (freeVeggieCredits === 0) {
+          veggieNote.textContent = "Vegetable add-ons are $0.50 each. Select any veggie to remove from the base recipe to unlock a free replacement veggie.";
+        } else {
+          const remainingCredits = Math.max(freeVeggieCredits - selectedVeggiePortions, 0);
+          veggieNote.textContent = remainingCredits > 0
+            ? `Select ${remainingCredits} free veggie${remainingCredits === 1 ? "" : "s"} as a replacement. Extra veggies after that are $0.50 each.`
+            : `Your free veggie swap${freeVeggieCredits === 1 ? "" : "s"} ${freeVeggieCredits === 1 ? "is" : "are"} applied. Extra veggies after the free swap${freeVeggieCredits === 1 ? "" : "s"} are $0.50 each.`;
+        }
+      }
+
+      if (!recipe) {
+        if (breakdown) breakdown.innerHTML = '<tr><td colspan="3">Choose a recipe to see ingredient details.</td></tr>';
+        if (priceEl) priceEl.textContent = "$0.00";
+        if (caloriesEl) caloriesEl.textContent = "0 cal";
+        if (recipeEl) recipeEl.textContent = "Choose one";
+        return;
+      }
+
+      const selectedProteinAddons = [...orderForm.querySelectorAll('input[name="protein"][data-calories]')]
+        .map((input) => {
+          const qty = getAddonQty(input);
+          return {
+            name: `${input.dataset.addonName} x${qty}`,
+            grams: Number(input.dataset.grams) * qty,
+            calories: Number(input.dataset.calories) * qty,
+            cost: Number(input.dataset.cost) * qty,
+            qty
+          };
+        })
+        .filter((item) => item.qty > 0);
+      let remainingFreeVeggieCredits = freeVeggieCredits;
+      const selectedVeggieAddons = veggieInputs
+        .map((input) => {
+          const qty = getAddonQty(input);
+          const freeQty = Math.min(qty, remainingFreeVeggieCredits);
+          remainingFreeVeggieCredits -= freeQty;
+          const paidQty = qty - freeQty;
+          return {
+            name: `${input.dataset.addonName} x${qty}${freeQty > 0 ? ` (${freeQty} free veggie swap${freeQty === 1 ? "" : "s"})` : ""}`,
+            grams: Number(input.dataset.grams) * qty,
+            calories: Number(input.dataset.calories) * qty,
+            cost: Number(input.dataset.cost) * paidQty,
+            qty
+          };
+        })
+        .filter((item) => item.qty > 0);
+      const selectedAddons = [...selectedProteinAddons, ...selectedVeggieAddons];
+
+      const addonCalories = selectedAddons.reduce((sum, item) => sum + item.calories, 0);
+      const addonCost = selectedAddons.reduce((sum, item) => sum + item.cost, 0);
+      const mealCalories = recipe.calories + addonCalories;
+      const mealPrice = recipe.price + addonCost;
+
+      if (recipeEl) recipeEl.textContent = recipeName;
+      if (caloriesEl) caloriesEl.textContent = `${mealCalories * quantity} cal`;
+      const foodTotal = mealPrice * quantity;
+      if (priceEl) priceEl.textContent = `$${foodTotal.toFixed(2)}`;
+      const deliveryChip = document.querySelector("#delivery-fee-chip");
+      const deliveryStrong = document.querySelector("#summary-delivery");
+      if (deliveryChip) {
+        if (deliveryCalculated && currentDeliveryMiles <= 5 && currentDeliveryMiles > 0) {
+          deliveryChip.hidden = false;
+          if (deliveryStrong) deliveryStrong.textContent = `$${currentDeliveryFee.toFixed(2)} (${currentDeliveryMiles} mi)`;
+        } else if (deliveryCalculated && currentDeliveryMiles === 0) {
+          deliveryChip.hidden = false;
+          if (deliveryStrong) deliveryStrong.textContent = "Free (nearby)";
+        } else {
+          deliveryChip.hidden = true;
+        }
+      }
+
+      if (breakdown) {
+        const recipeRows = recipe.ingredients.map(([name, grams, calories]) => `
+          <tr><td>${name}</td><td>${grams}g</td><td>${calories} cal</td></tr>
+        `).join("");
+        const addonRows = selectedAddons.map((item) => `
+          <tr><td>${item.name}</td><td>${item.grams}g</td><td>${item.calories} cal</td></tr>
+        `).join("");
+        breakdown.innerHTML = recipeRows + addonRows;
+      }
+    };
+
+    const orderForm = document.querySelector("#order-form");
+    const orderShell = document.querySelector("#order");
+    const orderScroller = document.querySelector(".lead-panel");
+    const orderDesktop = window.matchMedia("(min-width: 901px)");
+
+    if (orderShell && orderScroller) {
+      let snappingToOrder = false;
+
+      orderShell.addEventListener("wheel", (event) => {
+        if (!orderDesktop.matches) return;
+
+        const headerHeight = document.querySelector(".site-header")?.offsetHeight || 0;
+        const shellTop = orderShell.getBoundingClientRect().top;
+        const shouldSettleOrder = shellTop > headerHeight + 4 && shellTop < window.innerHeight * 0.72 && event.deltaY > 0;
+
+        if (shouldSettleOrder && !snappingToOrder) {
+          snappingToOrder = true;
+          event.preventDefault();
+          window.scrollTo({
+            top: window.scrollY + shellTop - headerHeight,
+            behavior: "smooth"
+          });
+          window.setTimeout(() => {
+            snappingToOrder = false;
+          }, 380);
+          return;
+        }
+
+        const maxScroll = orderScroller.scrollHeight - orderScroller.clientHeight;
+        if (maxScroll <= 0) return;
+
+        const delta = event.deltaY;
+        const atTop = orderScroller.scrollTop <= 0;
+        const atBottom = orderScroller.scrollTop >= maxScroll - 1;
+        const canScrollPane = (delta < 0 && !atTop) || (delta > 0 && !atBottom);
+
+        if (canScrollPane) {
+          event.preventDefault();
+          orderScroller.scrollTop += delta;
+        }
+      }, { passive: false });
+    }
+
+    if (orderForm) {
+      orderForm.addEventListener("change", updateOrderSummary);
+      orderForm.addEventListener("input", updateOrderSummary);
+      updateOrderSummary();
+
+      orderForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const button = event.currentTarget.querySelector("button");
+        const status = document.querySelector("#order-status");
+        const formData = new FormData(event.currentTarget);
+        const recipe = formData.get("recipe");
+        const quantity = formData.get("quantity");
+
+        button.textContent = "Order request received";
+        button.disabled = true;
+        if (status) {
+          status.textContent = `${quantity} for ${recipe} received on this page. Connect this form to email or a database before publishing.`;
+        }
+
+        setTimeout(() => {
+          button.textContent = "Order now";
+          button.disabled = false;
+        }, 2600);
+      });
+    }
+    const ORIGIN_ADDRESS = "17 Hampden St, Worcester, MA";
+    const MAX_DELIVERY_MILES = 5;
+    const DELIVERY_FEE_PER_MILE = 2;
+
+    async function nominatimGeocode(address) {
+      const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1`;
+      const res = await fetch(url, { headers: { "Accept-Language": "en" } });
+      const data = await res.json();
+      if (!data.length) return null;
+      return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
+    }
+
+    function haversineMiles(lat1, lng1, lat2, lng2) {
+      const R = 3958.8;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLng = (lng2 - lng1) * Math.PI / 180;
+      const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
+      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
+    const addressInput = orderForm?.querySelector('input[name="address"]');
+    const deliveryInfo = document.querySelector("#delivery-info");
+    let geocodeTimer;
+
+    if (addressInput) {
+      addressInput.addEventListener("input", () => {
+        clearTimeout(geocodeTimer);
+        const addr = addressInput.value.trim();
+        if (addr.length < 8) {
+          deliveryCalculated = false;
+          currentDeliveryFee = 0;
+          currentDeliveryMiles = 0;
+          if (deliveryInfo) deliveryInfo.hidden = true;
+          updateOrderSummary();
+          return;
+        }
+        geocodeTimer = setTimeout(async () => {
+          if (deliveryInfo) {
+            deliveryInfo.hidden = false;
+            deliveryInfo.style.color = "";
+            deliveryInfo.textContent = "Calculating delivery distance…";
+          }
+          try {
+            if (!cachedOriginCoords) {
+              cachedOriginCoords = await nominatimGeocode(ORIGIN_ADDRESS);
+              await new Promise(r => setTimeout(r, 1100));
+            }
+            const queryAddr = /worcester/i.test(addr) ? addr : addr + ", Worcester, MA";
+            const dest = await nominatimGeocode(queryAddr);
+            if (!dest || !cachedOriginCoords) {
+              if (deliveryInfo) { deliveryInfo.hidden = false; deliveryInfo.textContent = "Could not find that address. Please check and try again."; deliveryInfo.style.color = "var(--tomato)"; }
+              return;
+            }
+            const rawMiles = haversineMiles(cachedOriginCoords.lat, cachedOriginCoords.lng, dest.lat, dest.lng);
+            currentDeliveryMiles = Math.round(rawMiles);
+            if (currentDeliveryMiles > MAX_DELIVERY_MILES) {
+              currentDeliveryFee = 0;
+              deliveryCalculated = true;
+              if (deliveryInfo) {
+                deliveryInfo.hidden = false;
+                deliveryInfo.style.color = "var(--tomato)";
+                deliveryInfo.textContent = `Your address is about ${currentDeliveryMiles} miles away. We only deliver within ${MAX_DELIVERY_MILES} miles — please pick up at 17 Hampden St, Worcester, MA.`;
+              }
+            } else {
+              currentDeliveryFee = currentDeliveryMiles * DELIVERY_FEE_PER_MILE;
+              deliveryCalculated = true;
+              if (deliveryInfo) {
+                deliveryInfo.hidden = false;
+                deliveryInfo.style.color = "var(--mint-dark)";
+                deliveryInfo.textContent = currentDeliveryMiles === 0
+                  ? "You are very close — no delivery fee."
+                  : `About ${currentDeliveryMiles} mile${currentDeliveryMiles === 1 ? "" : "s"} away. Delivery fee: $${currentDeliveryFee.toFixed(2)}.`;
+              }
+            }
+            updateOrderSummary();
+          } catch (e) {
+            if (deliveryInfo) { deliveryInfo.hidden = false; deliveryInfo.textContent = "Could not calculate delivery distance."; deliveryInfo.style.color = "var(--tomato)"; }
+          }
+        }, 900);
+      });
+    }
+  </script>
+</body>
+</html>
